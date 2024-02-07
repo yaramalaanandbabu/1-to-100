@@ -1,0 +1,2275 @@
+<DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE-edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+</head>
+    <body style="padding: 100;">
+<p style="font-size: 23;border-top-style: solid;border-bottom-width: 2px;width: 100%;margin-left: 0%; margin-right: 20%;color:black;"><b>Chapter 1. Designing Functions</b></p>       
+        <p1 style="font-size: 20; padding=100px;">With the NetView program, you can manage complex, multivendor networks and
+systems from a single point. This chapter describes what you must know before
+making an addition or change to the NetView program, and shows some of the
+facilities that you can use to customize tasks.</p1><br>
+       <h1 style="border-top-style: solid;border-bottom-width: 2px;width: 100%;margin-left: 0%; margin-right: 20%;color:black;">Customization Areas</h1>
+        <p1 style="font-size: 20; padding=100px;">Customizing the NetView program takes place at various stages of network and
+system implementation. These topics are described in several NetView books. See
+Table 1 on page 3 for the NetView books that contain more information on the
+listed topics.<br><br>
+<i><b>Alias names</b></i> are used to communicate across networks. You can use alias names to
+resolve conflicts when duplicate resource names exist in multiple networks. With
+alias names, the name of the resource, such as a logical unit (LU), a class of
+service, a source LU (SRCLU), or a LOGON mode table from the sending network,
+is translated to a name that is unique to the receiving network. See<i> IBM Tivoli
+NetView for z/OS Installation: Getting Started</i> for more information about how to
+define alias names.<br><br>
+<i><b>Filtering</b></i> controls the amount of data presented to operators. Filtering also controls
+the amount of data recorded in the network log. The NetView automation table
+allows you to control the types of messages that each of your network operators
+receives, and the amount of data recorded to message logs. See the <i>IBM Tivoli
+NetView for z/OS Automation Guide</i> for descriptions of automation statements and
+descriptions of how to use automation statements to suppress (filter) messages.<br><br>
+You can also filter event data that network resources send to the hardware monitor. <i>Recording filters</i> control the information that is recorded in the hardware monitor's
+database. <i><b>Viewing filters</b></i> determine the records that appear on each network
+operator's terminal. You can find more information about hardware monitor
+filtering by referring to the <i>IBM Tivoli NetView for z/OS User's Guide: NetView </i>or the
+<i>IBM Tivoli NetView for z/OS Automation Guide</i> for a description of how to use
+automation statements to set recording filters for specific events. You can also see
+the NetView online help for the SRF and SVF commands.<br><br>
+<i><b>Focal point</b></i> support enables the NetView program to be defined as either a focal
+point node or a distributed entry point node. A focal point is a central network
+node that receives information from distributed entry point network nodes. The
+information forwarded from the entry points to the focal point can be messages,
+alerts, or MSUs. For more information on NetView focal point support, see the
+<i>IBM Tivoli NetView for z/OS Automation Guide.</i><br><br>
+            You can use <i><b>automation</b></i> to implement automatic responses to events that occur in
+your network. See the <i>IBM Tivoli NetView for z/OS Automation Guide</i> for more
+information about defining NetView automation statements to improve the
+productivity of your system operators and your network operators. For additional
+information the NetView program's automation, see the IBM Tivoli NetView for z/OS
+Automation Guide.<i>IBM Tivoli NetView for z/OS
+Automation Guide.</i><br><br>
+        Use <i><b>Generic alerts</b></i> and <i><b>code points</b></i> to obtain problem determination support for
+devices and applications in your network that the NetView program does not
+automatically support. Chapter 6, “Customizing Hardware Monitor Displayed
+Data,” on page 77 contains information on how to use the code point tables that
+are provided with the NetView program and the user-defined code point tables to
+build hardware monitor Alerts-Dynamic, Alerts-Static, Alerts-History, Event Detail,
+and Most Recent Events panels.<br><br>
+           <i> <b>National Language Support</b></i> allows your operators to interact with the NetView
+program in a language other than English. See <i>IBM Tivoli NetView for z/OS
+Installation: Configuring Additional Components</i> for a description of how to write
+your own message translations in any other supported language. The Japanese
+National Language version provides a Japanese version of NetView panels and
+messages.<br><br>
+            You might need to consider <i><b>operator control and security</b></i>. To control who can gain
+access to the NetView program and what effect an operator can have on your
+network, you should consider some level of logon verification, command
+authorization, and span of control. See the IBM Tivoli NetView for z/OS Security
+Reference for a complete description of how to implement the different levels of
+security verification available in the NetView program, how to limit the commands
+an operator can issue (command authorization), and which part of the network's
+resources an operator can control (span of control).<br><br>
+            You can modify the color and format of the <i><b>NetView command facility panel</b></i>. See
+Chapter 2, “Customizing the NetView Command Facility Panel,” on page 27 for
+more information.<br><br>
+            You can create or change <i><b>panels</b></i> for your online help, online message help,
+NetView help desk, the hardware monitor, and any user-written, full-screen
+applications. For a detailed explanation of how to create new panels or modify the
+panels that are supplied with the NetView program for these components, see
+Chapter 4, “Modifying and Creating Online Help Information,” on page 65 or
+Chapter 6, “Customizing Hardware Monitor Displayed Data,” on page 77.<br><br>
+            With<i><b>sequential logging</b></i>g (sequential access method log support), you can write
+variable length records to multiple user-defined logs. You can browse or print
+these logs using your operating system facilities. For more information about
+defining sequential log tasks, see the<i>IBM Tivoli NetView for z/OS Installation:
+Configuring Additional Components, IBM Tivoli NetView for z/OS Programming:
+Assembler, or IBM Tivoli NetView for z/OS Programming: PL/I and C.</i><br><br>
+            <i><b>Session monitor data</b></i>can be collected and kept in the session monitor database. To
+control how much session data is collected and kept, customize several session
+monitor definition statements. See the<i>IBM Tivoli NetView for z/OS Installation:
+Configuring Additional Components</i>for more information. Defining performance
+classes for the response time monitor (RTM) feature is also described in<i> IBM Tivoli
+NetView for z/OS Installation: Configuring Additional Components.</i>Objectives and
+boundaries are set for each performance class, and a performance class is then
+chosen for a session.<br><br>
+            <i><b>User-written functions</b></i> add new function to the NetView program or modify
+existing ones. You might want to develop your own command lists and
+user-written code. See the <i>IBM Tivoli NetView for z/OS Programming: REXX and the
+NetView Command List Language</i> for an overview of writing command lists in REXX
+or in NetView command list language to help you control your network and make the operators' jobs easier. You can find information about writing code such as
+command procedures and installation exits in <i>IBM Tivoli NetView for z/OS
+Programming: PL/I and C.</i> Information on writing command processors, installation
+exit routines, and user subtasks in assembler language can be found in <i>IBM Tivoli
+NetView for z/OS Programming: Assembler.</i><br><br>
+            The NetView <i><b>Resource Object Data Manager (RODM)</b></i> is a data cache that stores
+network configuration and status information about system resources. With
+RODM, you can automate network management functions associated with the
+resources defined to RODM. In addition, you can write RODM applications to
+perform other network management and automation tasks. See the <i>IBM Tivoli
+NetView for z/OS Resource Object Data Manager and GMFHS Programmer's Guide</i> for
+more information.<br><br>
+        </p1>
+        <p2 style="font-size: 23;"><b>Functions to Consider before Making Modifications</b></p2><br><br>
+        <p3 style="font-size: 20; padding=100px;">To customize NetView functions, you can write your own command procedures or
+modify one of the existing command procedures supplied by the NetView
+program. Ways to modify existing functions include:<br>. Filtering or modifying the system management facility (SMF) records written by
+the NetView program<br>
+. Providing a policy that routes operator messages<br>
+. Reformatting, analyzing, or editing operator messages<br>
+. Checking command authority<br><br>
+Additional functions you might want to add involve managing additional
+components in your network, such as X.25 data network components or voice
+network components. You can develop new applications and integrate them with
+existing management functions to meet your requirements. Examples of these
+user-defined functions include: <br>. Real-time monitoring of specific resources, applications, or components in your
+network<br>
+. Collecting and recording additional SMF data for trend analysis or other data
+reduction applications you need<br>
+. Providing additional response time problem detection and alerting<br>
+. Detecting different classes of line problems<br></p3>
+        <p4 style="font-size: 23;"><b>Finding Customization Information</b></p4><br><br>
+         <p5 style="font-size: 20; padding=100px;">Table 1 lists customization topics and provides the name of the documentation that
+             includes information about that topic.<br>
+        <img style="width: 600px;height: 250px" src="i1.png"><br>
+        <img style="width: 600px;height: 700px" src="i2.png"><br>
+             <img style="width: 600px;height: 300px" src="i3.png"><br>
+             For information about customizing AON,see the<i>IBM Tivoli NetView for z/OS User's
+Guide: Automated Operations Network.</i><br><br>For information about customizing the NetView management console, see the<i> IBM
+Tivoli NetView for z/OS Programming: REXX and the NetView Command List Language.</i><br><br>For information about customizing the Tivoli NetView for z/OS Enterprise
+Management Agent, see the<i>e IBM Tivoli NetView for z/OS User's Guide: NetView
+Enterprise Management Agent.</i><br><br><b>Collecting Data</b><br>Typical sources for collecting data useful in customization procedures are:<br> . Installation exit interfaces provided in the NetView program<br>
+. System or NetView services that provide status, configuration, processing, or
+authorization information<br>
+. Data files and network devices that are accessed using system or NetView
+services<br>
+. Messages to operators indicating that important events are occurring in a system
+or an application.<br><br><b>Installation Exits</b><br><br>
+Some NetView installation exits allow access to network management data.
+Through these installation exits and user-written functions you can obtain the text
+of operator commands, messages, and logons. Data that the NetView program
+writes to VSAM files and to the SMF log, as well as data on the VTAM
+communication network management (CNM) interface, can be accessed within
+other NetView installation exits.<br><b>Reference:</b>For more information about NetView installation exits, see the<i>IBM
+Tivoli NetView for z/OS Automation Guide, IBM Tivoli NetView for z/OS Programming:
+             Assembler, and IBM Tivoli NetView for z/OS Programming: PL/I and C.</i><br><br><b>Service Routines</b>
+System or NetView services give you access to information such as:<br> . System date and time<br>
+. Addresses of programs <br>
+. Addresses of named storage areas<br>
+. Valid NetView operators<br>
+. Operator span of control <br>. Values of command list variables<br><br><b>Reference:</b>see the<i>IBM Tivoli NetView for z/OS Programming: Assembler</i>for
+information about macros such as DSIDATIM, DSICES, DSIFIND, DSIQOS,
+DSIQRS, and DSIKVS. See the<i>IBM Tivoli NetView for z/OS Programming: PL/I and C</i>for information on service routines such as CNMINFC, CNMNAMS, CNMSCOP, and CNMVAR<br><br><b>Data Files</b><br>The NetView program provides specialized disk services and VSAM data services
+to access network management data files. In addition to these, functions written in
+a high-level language (HLL), such as PL/I and C, can invoke system allocation and
+access methods to read from NetView partitioned data sets and request VSAM
+I/O. CNM interface services also provide access to data coming from devices in
+the network.<br><br>Using the NetView PIPE command, you can read data files using the QSAM and 
+(From Disk) stages. Through the pipe facility, you also have access to VSAM data
+using DSIVSAM and DSIVSMX. See the <i>IBM Tivoli NetView for z/OS Programming:
+Pipes</i> for information about DSIVSAM and DSIVSMX.<br><br>REXX command lists can make use of the EXECIO command to read from and
+write to sequential data sets or partitioned data set members.<br><br><b>Reference:</b>see the<i> IBM Tivoli NetView for z/OS Programming: PL/I and C</i>for
+information about VSAM and CNM interface services.<br><br>
+For more information about pipes, see the<i>IBM Tivoli NetView for z/OS
+Programming: Pipes</i><br><br>see the<i>IBM Tivoli NetView for z/OS Programming: REXX and the NetView Command
+List Language</i>for information on REXX file input and output. See the<i> IBM Tivoli
+NetView for z/OS Programming: Assembler</i>for information on using DSIDKS for read
+access to NetView data sets or files, DSIZVSMS for VSAM I/O, and DSIZCSMS for
+CNM data services.<br><br><b>Operator Commands and Messages</b><br>You can issue operator commands within command procedures to request status
+data. The resulting response messages containing the requested status data can be
+trapped and processed in the command procedure. You can also process data in
+other system and network messages in user-written command procedures that are
+invoked through NetView automation.<br><br><b>Reference:</b>see the <i>e IBM Tivoli NetView for z/OS Programming: REXX and the
+NetView Command List Language</i>for information on REXX and NetView command
+list language message processing. See the<i>IBM Tivoli NetView for z/OS Programming
+PL/I and C</i>C for information on PL/I and C message processing. For more
+information on writing automation options, see the<i>IBM Tivoli NetView for z/OS
+Automation Guide.</i><br><br>
+             <b>Data Storage and Recording</b><br>You can use NetView command procedures to store and retrieve data needed for
+many user-written functions. Command procedures written in REXX, NetView
+command list language, PL/I, or C can create, set, and read global and task
+variables.<br><br>For permanent storage and for larger volumes of data, you can record certain
+information in data files rather than naming it and storing it as a command list
+variable. The NetView program allows you to record this data in a log. For
+example, you can log activities of your applications along with system or network
+activities that the NetView program is logging. You might want to produce a
+separate log of data that you collect.<br><br><b>References:</b>see the <i>IBM Tivoli NetView for z/OS Installation: Configuring Additional
+Components</i>and “Choosing a Language” on page 14 in this book for information
+on sequential logging.<br><br><b>Operator Presentation</b><br><br>You can customize or extend some of the NetView program's operator presentation
+functions with the VIEW command or by modifying panels that some components
+of the NetView system use to present data to operators. See Chapter 3, “Using the
+VIEW Command,” on page 31 and Chapter 4, “Modifying and Creating Online
+Help Information,” on page 65 for more information.<br><br>You can also use messages to present information to operators. With messages, the
+data from user-written functions becomes subject to NetView automation
+processing, allowing both automatic and manual operation of your functions.<br><br>
+             <b>references:</b>see the<i>IBM Tivoli NetView for z/OS Programming: Assembler</i> for
+information about DSIWCS, DSIMBS, DSIMQS, DSIPSS, and other message
+services. see the<i> IBM Tivoli NetView for z/OS Programming: PL/I and C</i>for
+information about using CNMSMSG. See the<i>IBM Tivoli NetView for z/OS
+Programming: REXX and the NetView Command List Language</i>for descriptions of
+REXX and NetView command list language write-to-operator (WTO) messages and
+other message services.<br><br>You can also customize the NetView command facility panel. See Chapter 2,
+“Customizing the NetView Command Facility Panel,” on page 27 for more
+information.<br><br>
+  </p5>
+        <h2 style="border-top-style: solid;border-bottom-width: 2px;width: 100%;margin-left: 0%; margin-right: 20%;color:black;">Tasks</h2>
+<p6 style="font-size: 20; ">To write functional extensions to the NetView program, keep in mind that the
+NetView design is based on z/OS.<br><br><b>References:</b>The z/OS library is a good reference for explanations of how words
+such as <i>dispatch, task,</i> and the names of various system services are used in this
+section.<br><br><b>NetView Program as a System Application Program</b><br>The NetView program is organized into several parallel tasks, each one capable of
+being dispatched separately in a multitasking environment. When any one task is
+idle, any of the others is eligible to run. A system multitasking dispatcher uses the
+NetView program's ATTACH system service to create each new task. When a task
+has no more processing to do and is ready to become idle, the task calls the WAIT
+system service. The POST system service takes a task out of an idle state, and
+allows it to be dispatched when new input data is ready to be processed for that
+task.<br><br><b>NetView Program Tasks</b><br>When the NetView program starts, its main task attaches several subtasks of
+different types, depending on the function to be performed. Each different task
+type determines the specific system interfaces and operator interfaces that are
+available under that task, and the type of transactions you can perform.<br><br>Each operator station task (OST) supports one NetView operator identified by a
+unique name. The operator identifiers (OPIDs) are defined in the NetView
+parameter library. OPIDs are assigned to an OST when an automated operator, known as an autotask, is activated using the AUTOTASK command, or when an
+operator logs on using a VTAM-connected terminal.<br><br>Each NetView-NetView task (NNT) also supports an operator. This type of task is
+used when the operator logs on to the NetView program from another NetView
+program rather than from a terminal. The other NetView program can be running
+in a different machine but must be connected through VTAM. The operator logs on
+from the other NetView program using the START DOMAIN command.<br><br>Each hardcopy task (HCT) supports a 3287 printer connected through VTAM to
+provide a hardcopy log for operators. See Figure 1 on page 9 for a structural
+overview of the command facility and its task structure.<br> <img style="width: 850px;height: 550px" src="i4.png"><br>There is only one primary program operator interface task (PPT) for each NetView
+program. When VTAM is running, the PPT opens a special VTAM application
+control block (ACB) for the VTAM programmable operator interface (POI) to
+receive unsolicited data from VTAM.<br><br><b>Note:</b>When the term <i>VTAM</i> is used in this book, it means the VTAM component
+of the z/OS Communications Server.<br><br>Each optional task (OPT) must be defined by a TASK statement in the NetView
+parameter library. The program module that runs for an OPT can be any program
+that meets the specification for optional tasks described in “Adding Optional Tasks
+to the NetView Program” on page 14.<br><br>
+Each data services task (DST) is a specific case of an optional task. See “Adding
+Optional Tasks to the NetView Program” on page 14. The TASK statement for a
+DST can name an initialization member in the NetView parameter library from
+which statements are read to define parameters for the functions performed by the
+specified DST.<br><br><b>Program Activity within a Task</b><br>After being activated, each type of NetView task waits for a request to perform a
+specific unit of work. When that unit of work is complete, the task enters a normalwait state. The task runs again when another request to perform a unit of work is
+received. Each task uses a list of event control blocks (ECBs) when it issues its
+WAIT. The NetView customization macros and services are provided to ensure that
+any implied waiting is done through the ECB list of the task so that all of the
+task-request interfaces within the NetView program remain enabled.<br><br>Every NetView task has its own termination ECB and its own message queue ECB.
+Some types of tasks (for example, OSTs or DSTs) can have additional ECBs in their
+ECB lists. The additional ECBs represent processing that the task tests for and
+performs when it is posted out of its WAIT state.<br><br><b>Queuing Work to NetView Program Tasks</b><br>While a task is in its normal WAIT state, another task in the NetView program can
+run. A NetView task that is running can be interrupted at any time by an event in
+the system, and can be preempted by a higher-priority task until that task issues
+its normal WAIT. System functions outside of the NetView program can also
+interrupt the NetView processing by running scheduled interrupt exit routines that
+are associated with specific NetView tasks.<br><br>
+Data for a task can be placed in its message queue or another work queue, and the
+task can be posted to perform that work at any time. The data can originate in
+another NetView task. This can happen when a DST queues message data to an
+OST to be displayed to an operator. The data can come into the NetView program
+through an interrupt exit routine that is scheduled by an event such as the
+completion of a VTAM RECEIVE request.<br><br><b>Message and Command Buffers</b><br>The data placed in the various task queues is formatted into a special data
+structure called a message buffer or a command buffer. A header at the beginning
+of the buffer indicates the type of data the buffer contains and any special formats
+by which the data must be accessed. Commands are processed by programs called
+command processors that you provide in your customization programming for the
+NetView program. Messages are processed either according to predefinitions built
+into the NetView task, or by NetView automation command processors. Message
+buffers are also available for automation at various points in NetView processing
+through installation exits.<br><br><b>Immediate Commands</b><br>An immediate command starts processing as soon as an operator enters the
+command. The requested function is performed immediately, even if the task is in
+the middle of a large queue of work.<br><br>
+An immediate command runs under the OST and NNT subtask environments.
+Unlike other commands, immediate commands can receive control with the
+TVBINXIT bit set on. Immediate commands interrupt mainline processing and
+cannot be interrupted by another command. Immediate commands can be
+interrupted by other exits in asynchronous activity.<br><br><b>Long-Running Commands</b><br>A long-running command is a command that can suspend processing to allow
+other activity, such as operator commands and data retrieval, and then resume
+processing. All the NetView components are long-running commands. NetView command list language, REXX, PL/I, and C command procedures are also
+long-running commands. The DSIPUSH macro allows an assembler command to
+run as a long-running command.<br><br>Long-running commands run under an OST, NNT, PPT, or DST (logoff routines
+only). Long-running commands can be:<br> . Invoked directly by operator input . Called by a command list . Called by another long-running command.<br><br>Long-running commands return control to the NetView program after scheduling
+work but before processing is complete. The NetView program then processes
+other work that is pending.<br><br>
+You can use long-running command processors to retrieve data from another task
+or from another domain without allowing the calling function or calling command
+list to proceed during the retrieval. When the retrieval is executing, the processor's
+task can continue to receive messages and accept commands.<br><br><b>Data Services Commands</b><br>A data services command processor (DSCP) runs under the DST subtask
+environment. DSCPs perform CNM data services and VSAM data services. DSCPs
+can also be called for centralized or serialized user-defined functions that do not
+use CNM interface or VSAM services.<br></p6>
+        <h3 style="border-top-style: solid;border-bottom-width: 2px;width: 100%;margin-left: 0%; margin-right: 20%;color:black;">Defining User-Written Programs on the Host: Exits and Commands</h3>
+        <p7 style="font-size: 20; ">You can provide two types of user-written programs within the NetView task
+environments:<br> . Installation exits<br>
+. Command processors.<br><br><b>References:</b>The programming interface details are provided in<i>IBM Tivoli NetView
+for z/OS Programming: PL/I and C and IBM Tivoli NetView for z/OS Programming:
+Assembler.</i>In designing user-written functions, you can use the installation exit
+interface and the command processor interface in the NetView program to fit your
+own programming into the overall structure of the NetView program.<br><br><b>Installation Exit Programs</b><br>Installation exits are provided in the NetView program at several points in the
+processing of logon and logoff data, command buffers, and message buffers.
+Different exits are driven based on the origin of the buffer and the stage of the
+NetView processing that the exit is in. Special exits are driven under DSTs to
+handle the data for a task during initialization, input, and output.<br><br><b>References:</b>For a summary of the NetView installation exits, see the<i> IBM Tivoli
+NetView for z/OS Automation Guide, IBM Tivoli NetView for z/OS Programming:
+Assembler, and IBM Tivoli NetView for z/OS Programming: PL/I and C. </i>br><br>General installation exits are identified and invoked with preassigned module
+names of DSIEXnn, and the DST exits are uniquely identified in the task DSTINIT
+initialization statements.<br><br>DSIEX21 is used to access the DSITCPRF member. For more information, see the<i>IBM Tivoli NetView for z/OS Security Reference.</i><br><br><b>Command Processors and Command Lists</b><br>NetView command processors and command lists can be started by:<br> . An operator request<br> . A command buffer queued to a task for processing by any NetView program<br>
+. A command call from another command processor<br>
+. An action specified in the NetView automation table<br><br><b>References:</b>To define command lists written in the NetView command list
+language or REXX to the NetView program, place them in the NetView command
+list libraryi<i> (ddname DSICLD)</i>see the<i>IBM Tivoli NetView for z/OS Programming:
+REXX and the NetView Command List Language</i>to find out how to create command
+lists for specific operating systems.<br><br>You must link-edit PL/I, C, and assembler command processors into the NetView
+load library (ddname STEPLIB), and define them to the NetView program. To define
+command processors written in PL/I, C, or assembler to the NetView program, use
+a CMDDEF statement in the CNMCMD member of DSIPARM. Command
+processors are link-edited into the NetView load library.<br><br> You can implement parts of a function in multiple installation exit programs and
+command processors. A common way of splitting a function across command
+processors is to divide processing between OSTs and DSTs. Because OSTs receive
+data from operator stations and return data back to them, a command processor is
+written to:<br> . Be called when the command is entered by an operator<br>
+. Parse the command data and form a data services request<br> . Queue a command buffer containing the data services command to be processed
+by the DST<br>
+. Return an error message or a command confirmation message to the operator<br><br>
+The DST completes the function in a separate command processor that is called
+because of the command buffer that is built and queued by the first command
+processor. Under the DST, functions requiring the special data services of VSAM,
+external logging, or the VTAM CNM interface are performed and messages can be
+returned to the operator task that queued the command. Figure 2 on page 13
+shows a typical program design for a function that uses the CNM interface and
+VSAM services.<br><img style="width: 650px;height: 250px" src="i5.png"><br>With long running commands, you can separate a complex function into a
+sequence of separate transactions. Command processors can establish a named
+stack entry where an anchor address is saved. A related command processor can
+later retrieve this address and perform another phase of the same processing.<br><br>When naming your commands, observe the following guidelines:<br> . Start with a letter (alphabetic)<br>
+. Avoid special characters such as commas and colons<br>
+. Avoid NetView command names, both internal commands and those shipped in
+CNMCMD. NetView internal command names are CSCFDST, HMSTATS,
+LOGNMVT, LOGRU, MESSAGE, PIPE, and VIEW. <br>. Avoid the following NetView prefixes:<br>– AAU<br>
+– BNH<br>
+– BNI<br> – BNJ<br> – BNK<br>
+– BNT<br>
+– CNM<br>
+– DSI<br> – DUI<br> – DWO<br>
+– EGV<br>
+– EKG<br>
+– EUY<br>
+– EXQ<br>
+– EYV<br>
+– EZL<br>
+– FKB<br>
+– FKV<br>
+– FKW<br>
+– FKX<br>
+– FLB<br>
+– FLC<br>
+– FMG<br>
+– FNA<br>
+– IHS<br><b>Note:</b>Messages that are issued by different means in a command processor or
+command list might not be displayed at its destination in the same order in whichthey are requested by the command processor or command list. For example,
+assume that a command list gets control via the designator character (DSIG) and
+runs on a CONSOLE=*ANY* autotask. If the command list then issues a PIPE<b>PIPE</b>
+command with the <b>CONSOLE</b> stage followed by a <b>WTO</b> command, the message
+issued by the<b> WTO</b> command might be displayed on the operator console before
+the message issued by the <b>PIPE</b> command with <b>CONSOLE</b>.</p7>
+        <h4 style="border-top-style: solid;border-bottom-width: 2px;width: 100%;margin-left: 0%; margin-right: 20%;color:black;">Adding Optional Tasks to the NetView Program</h4>
+        <p7 style="font-size: 20; ">You can write a completely new subtask in assembler language that the NetView
+program starts as an optional task (OPT) or subtask.<br><br>
+For an OPT, you must supply code for the subtask's initialization, installation exit,
+message, and command processing functions and termination. Because some of
+these elements are already provided in an existing DST, using the DST as a starting
+point is more practical.<br><br><b>Reference:</b>For more information on OPTs and DSTs in assembler language, see
+the <i> IBM Tivoli NetView for z/OS Programming: Assembler.</i></p7>
+            
+            
+            
+            
+            <h5 style="border-top-style: solid;border-bottom-width: 2px;width: 100%;margin-left: 0%; margin-right: 20%;color:black;">Choosing a Language</h5>
+            <p8 style="font-size: 20; ">One application program interface might be more suitable than another for your
+particular customization requirements. Consider the effects on performance, ease of
+creation, and maintenance when determining the interface to use. This section
+describes the languages available and lists reasons that you might choose one
+language over another.<br><br><b>Input and Output</b><br>REXX, PL/I, C, and assembler all offer functions for reading from and writing to
+direct access storage devices (DASD). The NetView program provides specialized
+disk services and VSAM data services to access network management data files. In
+addition, functions written in PL/I or C can invoke system allocation and access
+methods to read and write data. CNM interface services also provide access to data
+coming from devices in the network.<br><br><b>Reference:</b>see the<i> IBM Tivoli NetView for z/OS Programming: PL/I and C</i>for
+information about VSAM and CNM interface services. See the<i>IBM Tivoli NetView
+for z/OS Programming: Assembler</i> for information about using DSIDKS for read
+access to NetView data sets or files, DSIZVSMS for VSAM I/O, and DSIZCSMS for
+CNM data services.<br><br>see the<i>IBM Tivoli NetView for z/OS Programming: REXX and the NetView Command
+List Language</i> for information on REXX file input and output.<br><br><b>Performance</b><br>Write performance-critical applications in a compiled or assembled language.
+Generally, compiled or assembled command procedures execute faster than
+interpretive (REXX and NetView command list language) command lists.<br><br>You must write NetView-driven installation exit routines in assembler, PL/I, or C.
+Any command processor that accesses NetView control blocks must be written in
+assembler. Command procedures that can be driven by terminal input or by
+messages and that do not need to access NetView control blocks can usually be
+written in REXX or in NetView command list language. Generally, command lists written in REXX perform somewhat better than those written in NetView
+command list language. See “REXX Versus the NetView Command List Language.”
+Additionally, the performance of REXX command lists can be improved by
+compiling the REXX command list.<br><br>Preloading a REXX or NetView command list (see the NetView online help for the
+LOADCL command) improves overall performance of the command list.<br><br><b>Reference:</b>For details about compiling REXX command lists, see the<i>IBM Tivoli
+NetView for z/OS Tuning Guide. </i><br><br>For additional performance recommendations, see the<i> IBM Tivoli NetView for z/OS
+Installation: Configuring Additional Components and IBM Tivoli NetView for z/OS
+Installation: Configuring Additional Components.</i><br><br><b>Stability</b><br>If you anticipate changes to your procedures as you gain more experience or as
+your operating environment changes, you might want to use command lists to
+implement the procedures initially. Changes are easier to make in command lists
+because you can incorporate the changes and test them online without having to
+restart the NetView program. You can translate procedures into a compiled
+language when you become confident of their stability.<br><br><b>Testing</b><br>Testing capabilities for command lists include the ability to trace execution using
+either operator commands or command list statements. A remote interactive
+debugger (RID) that displays information to a NetView operator console can help
+you in debugging PL/I and C user-written command processors and installation
+exits. The NetView program does not provide any specific functions to help debug
+assembler programs.<br><br><b>Speed Of Implementation</b><br>Because command lists are easy to write, test, and put into production, they can be
+an appropriate choice in addressing immediate operational needs.<br><br><b>REXX Versus the NetView Command List Language</b>If all of your systems can run REXX, choose REXX over the NetView command list
+language for writing command lists. REXX is a structured language that enables
+the use of subroutines. REXX is the easier language to learn and provides
+additional functions, such as mathematical capabilities and improved string
+handling. REXX can read from and write to data sets with EXECIO. In addition,
+the performance of REXX command lists can be improved by compiling the REXX
+command list.<br><br>
+REXX language skills can be used in environments other than the NetView
+program. However, REXX procedures written for the NetView program probably
+will not be transportable to other environments because of their function content.
+In multiple environments, REXX is more useful because you can transfer REXX
+programming skills to solve NetView problems without learning another language.<br><br>
+If your installation uses several operating systems, it is possible that some of them
+support REXX and others do not. In this case, you can create bilingual command
+lists that contain both REXX and NetView command list versions of your instructions. The command lists run in REXX if REXX is available; otherwise, they
+process in the NetView command list language.<br><br><b>Reference:</b>For details about compiling REXX command lists, see the<i>IBM Tivoli
+NetView for z/OS Programming: REXX and the NetView Command List Language.</i><br><br>see the <i>IBM Tivoli NetView for z/OS Programming: REXX and the NetView Command
+List Language</i>for more information about bilingual command lists.<br><br><b>Language Choices by Function</b><br>Table 2 lists additional capabilities to consider when choosing which language to
+use.<br><img style="width: 650px;height: 600px" src="i6.png"><br><b>Reference:</b>See your specific programming language guides for considerations on
+writing in mixed languages.<br><br><b>Logging</b><br>The NetView program provides several ways to log information. Table 3 lists the
+available features of the common logging methods.<br><img style="width: 650px;height: 150px" src="i7.png"><br><img style="width: 650px;height: 650px" src="i8.png"><br><br><b>Reference:</b>For information about the network log, see the<i>IBM Tivoli NetView for
+z/OS Automation Guide.</i>For information about external logging using the system
+management facility (SMF), a user-defined log, or sequential logging, see the<i>IBM
+Tivoli NetView for z/OS Installation: Configuring Additional Components. </i><br><br><b>Cross-Reference for Message and Environment Functions</b><br>Table 4 on page 18, Table 5 on page 19, and Table 6 on page 20 provide a
+cross-reference for the NetView system data, task data, and message functions.
+With these matrixes, you can determine whether the function you are interested in
+is available to the automation table, REXX, NetView command list language, or
+assembler. You can also determine what the name of the function is. Each matrix is
+alphabetized by the name of the REXX function.<br><br><b>Note:</b><br>1. If you are writing assembler-language command processors, see the<i>e IBM Tivoli
+NetView for z/OS Programming: Assembler</i>for the BUFHDR mapping within the
+DSITIB mapping macro, the DSIIFR mapping macro, and the DSIAIFRO
+mapping macro for exact field definitions.<br>2. If you are writing command lists, see the <i>IBM Tivoli NetView for z/OS
+Programming: REXX and the NetView Command List Language</i> for more
+information about NetView command list language control variables and REXX
+functions.<br>3. If you are writing in PL/I or C language, see the <i>IBM Tivoli NetView for z/OS
+Programming:</i> PL/I and C for more information about the CNMINFC, CNMINFI,
+and CNMGETA service routines.<br>4. If you are writing automation table statements, see the<i> IBM Tivoli NetView for
+z/OS Automation Guide</i> for a description of the automation table condition items.<br><img style="width: 650px;height: 750px" src="i9.png"><br><img style="width: 650px;height: 750px" src="i10.png"><br><img style="width: 650px;height: 750px" src="i11.png"><br><img style="width: 650px;height: 750px" src="i12.png"><br><img style="width: 650px;height: 750px" src="i13.png"><br><img style="width: 650px;height: 750px" src="i14.png"><br><img style="width: 650px;height: 750px" src="i15.png"><br><img style="width: 650px;height: 450px" src="i16.png"><br></p8>
+         <h6 style="border-top-style: solid;border-bottom-width: 2px;width: 100%;margin-left: 0%; margin-right: 20%;color:black; font-size: 20;">Customizing PF Keys and Immediate Message Line</h6>
+        <p9 style="font-size: 20; ">You can set global variables that can be searched for and placed on the PF key line
+on panels displayed by BROWSE, STATMON, and VIEW commands. On VIEW
+panels, the immediate message line is also used as the PF key line. The variable
+names are prefixed by (&)CNMIM and followed by the application name. Valid
+variables include CNMIMLBROWSE, CNMIMMBROWSE, CNMIMSTATMON,
+CNMIMVIEW, and CNMIMWINDOW.<br><br> For View panels, if the VIEW application has not provided a value for CNMIMDL,
+VIEW searches the global dictionaries (task, then common) for a variable named
+CNMIMxxx, where xxx is the application name provided when VIEW was
+invoked. If the CNMIMxxx variable is not found, VIEW searches for CNMIMVIEW
+in the same dictionaries. This is similar to the way keys are set for VIEW
+applications. Finally, if none of these variables is present, the text from message
+            BNH257I is used.<br><br><b>Modifying CNMKEYS</b><br><img style="width: 650px;height: 450px" src="i17.png"><br>The PFKDEF command list (CNME1010) can assign one or more task global
+variables from the target file to match the key settings for applicable NetView
+applications. Figure 3 shows how you can set the PF keys for the Browse, Status
+            Monitor, and View panels.<br><br></p9>
+            <h6 style="border-top-style: solid;border-bottom-width: 2px;width: 100%;margin-left: 0%; margin-right: 20%;color:black; font-size: 25;">Chapter 2. Customizing the NetView Command Facility Panel</h6>
+        <p10 style="font-size: 20; ">The NetView command facility panel can be customized. You can customize: <br>. The colors of fields on the panel . The information that precedes the message text<br> . The default colors for held, action, normal, and immediate classes of messages<br>
+. The color of the command area<br>
+. How much of the panel area is set aside for held and action messages<br><br>
+            <h7 style="border-top-style: solid;border-bottom-width: 2px;width: 100%;margin-left: 20%; margin-right: 20%;color:black; font-size: 25;">Using a Screen Format Definition</h7>
+        <p11 style="font-size: 20; ">You can use a screen format (SCRNFMT) definition to specify attributes for the
+command facility panel and a default value for the color of messages. To activate
+the screen format definition, use the NetView DEFAULTS and OVERRIDE
+commands. Refer to NetView online help for details on how to use DEFAULTS and
+OVERRIDE. A short description of each option that can be specified in a screen
+format definition is listed under “Screen Format Definition Statements.”<br><br><b>Reference:</b>For detailed descriptions of the screen format definition statements,
+refer to<i>IBM Tivoli NetView for z/OS Administration Reference. </i>CNMSCNFT is a
+sample screen format definition, provided in<i>IBM Tivoli NetView for z/OS
+Installation: Configuring Additional Components.</i><br><br><b>Note:</b><br>1. Color and highlighting must be supported by your hardware and emulator. In
+addition, you must log on to the NetView system with a query-type logmode.<br>
+2. When you replace an active screen format definition with a new screen format
+definition, all definition statements are replaced. Any definition statement that
+is not specified in the new screen format definition uses the value that is
+supplied with the NetView program. The values that are supplied with the
+NetView program for each definition statement are listed in<i> IBM Tivoli NetView
+for z/OS Administration Reference.</i><br>For example, a screen format definition has been activated with the DEFAULTS
+command. Subsequently, operators activate customized screen format
+definitions using the OVERRIDE command. The statements that were not
+specified in an operator's screen format definition use the value that is supplied
+with the NetView program rather than the value from the screen format
+            definition that was activated with the DEFAULTS command.<br></p11>
+            <h8 style="border-top-style: solid;border-bottom-width: 2px;width: 100%;margin-left: 20%; margin-right: 20%;color:black; font-size: 25;">Screen Format Definition Statements</h8><br>
+        <p12 style="font-size: 20; ">The following screen shows the fields that you can customize on the NetView
+message panel.<br><img style="width: 650px;height: 450px" src="i18.png"><br>NetView Message Panel<br>
+            The following formats can be customized:<br>
+<b>▌1▐ Title area</b><br>
+Use the TITLE statement in a SCRNFMT definition to customize the color
+of the word NETVIEW on the screen.<br>
+            <b>▌2▐ Domain identifier</b><br>
+Use the TITLEDOMID statement in a SCRNFMT definition to customize
+the color of the NetView domain name.<br>
+<b>▌3▐ Operator identifier</b><br>
+Use the TITLEOPID statement in a SCRNFMT definition to customize the
+color of the operator name.<br>
+<b>▌4▐ Current date</b><br>
+Use the TITLEDATE statement in a SCRNFMT definition to customize the
+color of the date. You can also customize the format of the date using the
+DEFAULTS and OVERRIDE commands.<br>
+,<b>▌5▐ Time data was last displayed</b><br>
+Use the TITLETIME statement in a SCRNFMT definition to customize the
+color of the time. You can also customize the format of the time using the
+DEFAULTS and OVERRIDE commands.<br>
+<b>▌6▐ and ▌7▐ System states</b><br>
+Use the TITLESTAT statement in a SCRNFMT definition to customize the
+color of the status characters in the upper right corner of the panel.<br>
+<b>▌8▐ COLUMNHEAD line</b><br>
+Use the COLUMNHEAD statement in a SCRNFMT definition to create a
+line at the top of the screen with labels for prefixes. This line can have up
+to 16 tags (C1...C16) in any order. Total length of tags, including one space
+between each tag, cannot exceed 78 characters. Set the tags using the
+SCRNFMT definition. The PREFIX and NOPREFIX statements control
+which tags appear. You can also choose not to have the line appear on the
+screen.<br>
+<b>▌9▐ Output area</b><br>
+Use the HELD, ACTION, NORMAL, and NORMQMAX statements of the
+SCRNFMT definition.<br>
+            <b>Note:</b> HELD, ACTION and NORMAL statements set default colors for
+messages. If message color has been previously set, the default message
+color will not take effect. See “Message Color and Highlighting” on page
+30 for more information.<br><br>
+The NORMQMAX statement specifies how many normal messages are
+queued for later display (excluding held and action messages). An example
+of this is the number of messages kept while you are working in another
+panel, or while the panel is locked.<br><br>
+When the NORMQMAX is exceeded, the NetView program automates and
+logs (if required) incoming messages and then discards them, without
+interrupting the operator. The oldest messages are discarded until the
+number of queued messages is half the NORMQMAX value.<br><br>
+When the operator returns to the command facility (or the panel is
+unlocked), message DSI593A indicates how many messages were
+discarded.<br><br>
+The value of NORMQMAX can range from 0 to 2147483647; the default is
+3000. The minimum value allowed is 100 messages, so if you specify less
+than 100, it is rounded to 100. Specifying a NORMQMAX value of 0 means
+an infinite queue, and is basically the same as specifying the maximum
+value of 2147483647.<br><br>
+<b>Attention:</b> Setting the value of NORMQMAX too high might cause out of
+storage conditions. Conversely, setting the value too low can prevent your
+operators from seeing all of their messages even when message traffic rates
+are low.<br><br> The NORMQMAX value also applies to hardcopy printers and to
+OST-NNT cross-domain sessions. Hardcopy printers can get backlogged
+because they are slow or because they run out of paper. An OST-NNT
+session can get backlogged because the message traffic over the session
+exceeds the send rate for that session.<br>
+            <b>▌10▐ Area for held and action messages</b><br>
+            Use the HOLDPCNT statement in the SCRNFMT definition. The NetView
+program uses 10 lines of the screen for the title line, immediate message
+area, command area, and a warning held-message: DSI151I. Held messages
+are not displayed in these 10 lines. You can use HOLDPCNT to specify
+what percentage of the remaining lines you want to use for held messages.
+For example, on a 24-line screen, setting HOLDPCNT to 100% will give
+you 14 lines for held messages.<br><br>
+Specifying HOLDPCNT as 0 means that held messages are not displayed
+on the screen. If HOLDPCNT is non-zero, the minimum number of lines
+used for held messages is two.<br><br>
+You can use HOLDWARN to get a warning message that held messages
+exist, even though they are not displayed on the screen.<br><br>
+<b>Note:</b> The NetView program will not display the control line of a held
+message without the data line of the message. This helps prevent operators
+from accidentally erasing a held message without seeing the text.<br><br>
+            <b>▌11▐ Indentation</b><br>
+            Use the INDENT and MLINDENT statements in the SCRNFMT definition.<br><b>Separator line</b><br>The LASTLINE statement of the SCRNFMT definitions changes the color of
+the dashed separator line between the new and old messages of the screen.<br><br><b>▌12▐ Command entry indicator</b><br>Use the CMDLINE statement of the SCRNFMT definition<br><b>Lock/unlock indicator (***)</b><br>Use the LOCKIND statement in the SCRNFMT definition.<br><b>▌13▐ Immediate message area</b><br>Use the IMDAREA statement in the SCRNFMT definition.<br><b>▌14▐ Command area</b><br>Use the CMDLINE statement in the SCRNFMT definition to change the
+color used for the command input area. You can change the size of the
+            command area with the INPUT command.<br><br></p12>
+            <p13 style="border-top-style: solid;border-bottom-width: 2px;width: 100%;margin-left: 20%; margin-right: 20%;color:black;">Message Color and Highlighting</p13><br>
+            <p14 style="font-size: 20; ">Four color and highlighting attributes can be set for messages:<br> . Foreground color<br>
+. Background color<br>
+ . Intensity<br>
+                . Highlighting<br><br><b>Note:</b>Background color is not supported on most 3270 devices and emulators. In
+this case, black is used for the background color.<br><br>The color and highlighting attributes for messages can be set in several places:<br><br> . In the automation table<br>
+. For MVS system messages, in the MVS MPF table<br>
+. In installation exits<br>
+. In a screen format definition<br><br>
+                Of all of the options listed, the screen format definition takes the lowest
+precedence. The following rules of precedence apply:<br> . MPF table color intensity and highlighting for MVS system messages override
+the screen format definition for these attributes.<br>. Automation table specifications of color intensity and highlighting override the
+following:<br>– The MPF table specified color intensity and highlighting<br>
+– Screen format definition of color intensity and highlighting<br>
+– DSIEX02A and DSIEX17 specification of color intensity and highlighting
+(these exits are driven prior to automation).<br>. Installation exit specifications of color intensity and highlighting override the
+MPF and the screen format definition for these attributes. In addition,
+installation exit DSIEX16 (post-automation) can override the color intensity and
+highlighting specified in the automation table.<br><br>Each of these presentation attributes can be manipulated independently. For
+example, an MVS system message that had a match in the automation table with a
+color action would be presented in the intensity and highlighting as specified in
+the MPF table, but with the color as specified in the automation table.<br><br>
+                <h style="border-top-style: solid;border-bottom-width: 2px;width: 100%;margin-left: 20%; margin-right: 20%;color:black; font-size: 30;">Chapter 3. Using the VIEW Command</h><br><br>
+                This chapter documents general-use programming interface and associated
+guidance information.<br><br>
+The VIEW command processor can be used to display full-screen panels from
+user-written programs. With the VIEW command, users can design their own
+panels and control the color and highlighting of panel text.<br><br>
+The VIEW command enables command lists or command processors written in
+PL/I or C to interact with an operator with full-screen panels. The data from the
+command list or PL/I or C variables can be substituted into the panels.<br><br>
+Whether a field attribute is supplied by the value of an attribute variable or an
+attribute character in a panel definition, it may apply to more than one line in a
+display when the defined line is the last line of the panel definition, but not the
+last actual row on the 3270 device (emulator).<br><br>
+When the value of a variable in a panel definition is longer than the remaining
+space in a display line, the value will be truncated and not continue to the next
+line of a display. Note: The space available in a display line is governed by 3270 device (emulator)
+characteristics and the text indicator in a panel definition.<br><br><br>
+                <h10 style="border-top-style: solid;border-bottom-width: 2px;width: 100%;margin-left: 20%; margin-right: 20%;color:black; font-size: 30;">Creating Full-Screen Panels</h10><br><br>
+                To create panels for your operators, define the text and format in a data set or file.
+The panel source consists of a prologue, followed by text and variables that define
+the panel to be displayed. Figure 5 on page 32 is an example of the information in
+the help source file. See “General Help Fields” on page 32 for descriptions of each
+numbered field in the figure.<br><br>
+If your display consists of a sequence of lines or messages, you might find it easier
+to use the WINDOW command for your full-screen panel. Use WINDOW to alter
+its display and to define or redirect subcommands. For more information, refer to
+the online help for WINDOW.<br><br> The NetView program provides a number of command lists that use the VIEW
+command to display full-screen panels. Displaying a new panel by invoking VIEW
+from a command list requires that you either modify an existing command list or
+write a new one. When you modify a command list that is supplied by IBM, first
+copy it into a user data set and change its name.<br><img style="width: 650px;height: 450px" src="i19.png"><br><b>General Help Fields</b><br>The special characters in the source file, such as the dollar sign ($) and the percent
+sign (%), are described in “Controlling Color and Highlighting of Fields” on page
+38.<br><br><b> 1 Prologue</b><br>
+An optional section for programmer comments. Each line of the prologue
+begins with /* in columns 1 and 2. Only comments can be placed in this
+section. If comments are displayed in the Help or Option Definitions
+section, a return code of 83 is sent, and the panel is not displayed.
+Comments that are displayed after these sections are treated as data.<br>
+<b> 2 Help</b><br>
+Optional definition of the panel. This field follows the prologue and is
+coded in the following format:<br>
+Column<br>
+1 15<br>
+HELP=helppan commen<br>
+<b>Note:</b>You can also use HELP CMD=’command_text’. See the following
+description for 3.<br>
+<b>3 Option Definitions</b><br>
+An optional list of selections the operator can choose. This list can contain
+panel names or commands. You can add an optional comment after the
+panel name or command. At least one blank must separate the panel name
+or command from the comment. The list cannot exceed 49 entries. The list
+is coded in the following format:<br>
+Column<br>
+1 3<br>
+n panel_name or CMD='command_text' comment<br>
+Where n is the character the operator enters to call the panel or issue the
+command.<br>
+To produce a continuation panel, n is blank, as follows:<br>
+Column<br>
+1 3<br>
+panel_name comment<br>
+In this case, panel_name identifies the continuation panel.<br>
+<b>4 Text Indicator</b><br>
+Three required asterisks separate the prologue, help, and panel definitions
+from the displayed panel text. These asterisks can be followed by the
+following options, which can be in any order and must be separated by at
+least one blank. v The AT1 option is attribute set 1 for color and highlighting attributes.
+See Table 7 on page 34 and Table 11 on page 39 for more information.<br> . The AT2 option is attribute set 2 for color and highlighting attributes.
+See Table 7 on page 34 and Table 11 on page 39 for more information.<br>. The SFD (screen-format default) option means that when the color or
+highlighting for a field on a VIEW panel is either specified or else
+defaults to X'00' (the default for 3270), then the color or highlighting
+specified for the NCCF screen by the DEFAULTS SCRNFMT command
+or OVERRIDE SCRNFMT command is used.<br> IF SFD is not specified, or
+if no active SCRNFMT member is in effect, X'00' is sent to the device. If
+the VIEW panel field is interpreted as the input command line, the color
+and highlighting specified by the SCRNFMT CMDLINE is used; for any
+other field, the SCRNFMT NORMAL specification is used. Sample
+CNMSCNFT contains additional information.<br><br> . The XVAR option provides variables that can contain up to 31
+characters, including periods.
+Without this option, variables can contain only 11 characters and cannot
+contain periods. See Table 7 on page 34 and “Compound Symbols” on
+page 45 for more information on the XVAR option.<br><br>. The OPTROW=<i>optchar</i> option can be used to specify that any row (line)
+that begins with the character defined by optchar is an optional row. The
+maximum number of optional rows is defined as the number of rows
+supported by the terminal, minus 24 (which can be zero). Optional rows
+defined on the panel that go beyond this maximum are not displayed.
+Also, rows (regular or optional) that go beyond the terminal's limit are
+not displayed.<br><br>For an optional row, all the characters are shifted left one position to
+compensate for the <i>optchar</i>, and the resulting last position (column 80) is
+treated as a blank.See the WINDOW command list (CNME1505) and its View panel,
+CNMKWIND, as an example of how to use OPTROW.<br><br> . The WIDE option enables the entire line width to be used on terminals
+that support more than 80 columns. When WIDE is specified, panel
+variables that are the last non-blank specifications on their respective
+lines are substituted. The variables are not truncated until the end of the
+line, which is defined by the terminal.<br><br>
+See the WINDOW command list (CNME1505) and its View panel,
+CNMKWIND, as an example of how to use WIDE.<br><img style="width: 650px;height: 150px" src="Screenshot%202024-02-07%20175951.png"><br>
+     When three asterisks are followed by the AT2 option, attribute set 2 is used for
+color and highlighting. For example:<br> . *** AT2 for English<br>
+. For attribute set 1,<br> use *** or *** AT1<br>
+For attribute set 1 and variables as long as 31 characters,<br> use *** AT1 XVAR for
+English.<br>
+See “Controlling Color and Highlighting of Fields” on page 38 for more
+information on attribute sets 1 and 2.<br>
+<b>5 Name</b><br>
+The name of the panel.<br>
+<b>6 Heading</b><br>
+The text that describes the use of the panel.<br>
+<b>7 Panel Text</b><br>
+Up to 24 lines of text that constitute the displayed panel. See also the
+OPTROW option described under Text Indicator.<br> Command list variables can be displayed anywhere in the panel text.See
+“Displaying Variables in Source Panels” on page 43 for more information.<br>
+<b>8 Message Area</b>
+The variable & CNMIMDL displays NetView error messages on line 23 of
+the panel. If the application has not provided a value for CNMIMDL,
+VIEW searches the global dictionaries (task, then common) for a variable
+named CNMIMxxx, where xxx is the application name provided when
+VIEW was invoked. If the variable is not found, VIEW searches for
+CNMIMVIEW in the same dictionaries. Finally, if none of these variables is
+present, the text from message BNH257I is displayed. The default English
+text for BNH257I is “TO SEE YOUR KEY SETTINGS, ENTER ’DISPFK’”. The
+text of message BNH257I can be changed in the message translation table.<br>
+See “Using PF Keys and Subcommands with VIEW” on page 57 for a list
+of the subcommands that can be assigned to PF keys and “Customizing PF
+Keys and Immediate Message Line” on page 25.<br>
+<b>9 Command Line</b><br>
+NetView commands are typed on the command line. In a VIEW command with the NOINPUT option specified, a command line is defined by the
+tilde (~) attribute symbol. The & CUR option identifies the cursor position
+within the command line. Only one input field and only one & CUR option
+is processed per panel. This option is useful for predefining a command in
+the input field. Otherwise, the cursor defaults in the following order:<br>
+1. The last attribute variable that specified 'UY'<br>
+2. The first tilde field, if one is present<br>
+3. The first position in the upper-left corner   <br> <br><br>
+                <h11 style="border-top-style: solid;border-bottom-width: 2px;width: 100%;margin-left: %; margin-right: 20%;color:black; font-size: 30;">Coding the VIEW Command</h11><br>code the VIEW Command Follow:<br><img style="width: 650px;height: 350px" src="i20.png"><br><b>NOINPUT</b><br>Specifies that the VIEW command does not return any information to the
+procedure that invoked it. NOINPUT is the default. If the panel defines a
+command line, the NetView program treats input as a command. With the
+NOINPUT option, there is no need for your command procedure to invoke the
+UNIQUE command.<br><br>See Figure 5 on page 32 for the PF keys provided by the NetView program
+when you specify NOINPUT.<br><br><b>INPUT</b><br><br>Specifies that input values and AID information can be returned to the
+procedure calling the VIEW command. INPUT also specifies that cursor
+location can be received from and returned to the procedure calling the VIEW
+command. When you use the VIEW command with the INPUT option, use the
+UNIQUE command to enforce uniqueness (only one occurrence of the
+command on the roll stack). See “Using the UNIQUE Command” on page 48
+for more information.<br><br><b>COMPAT</b><br>Specifies that the functionality for this invocation of VIEW is compatible with
+the behavior of VIEW for releases of the NetView program prior to Version 5
+Release 1. Refer to the documentation for the prior release in which the
+program using VIEW had been written for details of the functionality. The
+COMPAT option is the default.<br><br><b>EXTEND</b><br>Specifies that the extended functionality introduced in Tivoli NetView for z/OS
+Version 5 Release 1 be used for this invocation of VIEW. Examples of this
+functionality are:<br> . The ability to have VIEW pick up any local variable values that are specified
+and use those values rather than any global variable values that have been
+specified.<br> . The ability for VIEW to be interrupted with RC=2 when a message is
+trapped.<br>
+The EXTEND option can be used to allow dynamic updating of variables
+without the need to run separate programs (using global variables) to perform
+the updating.<br>
+The EXTEND option is not supported for the NetView command list language.<br><br><b>Usage Notes®</b><br>. This table summarizes the difference between VIEW with the EXTEND option
+and VIEW with the COMPAT option:<br><img style="width: 650px;height: 450px" src="i21.png"><br><b>Note:</b>All subsequent descriptions of VIEW in this book assume the extended
+functionality introduced in Tivoli NetView for z/OS Version 5 Release 1.
+However, in order to use this functionality, you must specify the EXTEND
+option on the VIEW command.<br><br>. By specifying NOINPUT, you can use a command procedure to display online
+help panels. See Chapter 4, “Modifying and Creating Online Help Information,”
+on page 65, for more information on how to code help panel hierarchies.<br> . You can use the VIEW command to display data from messages obtained
+through TRAP processing immediately upon receipt of the message. Updates are
+also possible from non-message sources on a timed basis. For more information,
+see “Dynamic Update Capabilities” on page 59.<br> . The VIEW command is intended to be used only from a command procedure. If
+you use the VIEW command in command lists to display a panel, minimum processing should be done between exiting the view and the end of the
+procedure. Operator input might be inhibited between the time the view is
+ended and the end of the procedure.<br>. If a VIEW NOINPUT command is invoked with the same compname as a
+previous VIEW command, then the previous VIEW command is canceled as well
+as the command procedure that invoked that VIEW command.
+                <h12 style="border-top-style: solid;border-bottom-width: 2px;width: 100%;margin-left: 20%; margin-right: 20%;color:black; font-size: 20;">Return Codes from VIEW and BROWSE</h12><br>Table 9 lists and describes the return codes that can be received for the VIEW and
+BROWSE command. The table also provides a brief description of the action you
+must take<br><img style="width: 650px;height: 750px" src="i22.png"><br><br><br>
+                <h13 style="border-top-style: solid;border-bottom-width: 2px;width: 100%;margin-left: 20%; margin-right: 20%;color:black; font-size: 20;">Return Codes from VIEW and BROWSE</h13><br><br>The SHOWCODE command list is used by command procedures to display
+descriptions of the nonzero return codes returned from the VIEW command.<br><br>
+Code the SHOWCODE command as follows:<br><br><img style="width: 650px;height: 750px" src="i23.png"><br>Before issuing SHOWCODE from a command procedure, check to make sure that
+the return code is not zero. See “Example of a REXX Command List to Update a
+Panel” on page 60 for an example that uses SHOWCODE to display error
+messages from VIEW.<br><br>
+            <h14 style="border-top-style: solid;border-bottom-width: 2px;width: 100%;margin-left: 20%; margin-right: 20%;color:black; font-size: 20;"> Controlling Color and Highlighting of Fields</h14><br><br>You can change or add to the color and highlighting of the existing panels. Text
+color and highlighting in the displayed panel are controlled by attribute symbols
+or variables. After you code attribute symbols in the source panel, they appear as
+blanks in the displayed panel.<br><br>
+Scanning for attribute symbols or variables in a particular line occurs only if
+column 1 contains an attribute symbol or panel variable. Otherwise, the line is
+displayed as is, in the default color and without variable substitution.<br><br>
+                <b>Note:</b> Color and highlighting depend on the terminal you are using.<br><br>
+                <b>Attribute Symbols</b><br>You can specify attribute symbols on the source panel to color or highlight text.
+Edit the source panel and replace the blank space before the text with an attribute
+symbol selected from the second column of Table 11 or Table 12.<br><br>Variables are parsed only at the first level. Nested VIEW variables are substituted
+but not parsed. Therefore, color attribute symbols that are located in nested
+variables are displayed as data.<br><br>An option specified in the header of a panel determines the set of attribute
+definitions to use for that panel. If you specify no option (***), use the original set
+(attribute set 1). Use attribute set 2 when you specify the option (*** AT2) on the
+text indicator line of the panel definition. See “View-Based Help” on page 66 for
+more information on the text indicator line.<br><br><img style="width: 650px;height: 750px" src="i24.png"><br><br><b>Displaying Special Attributes</b><br><br>If you want to display a particular symbol that doubles as an attribute within a
+colored or highlighted row, place a double quotation mark (") in front of the
+symbol. For example, if you want the left brace ({) to appear in text, enter "{ in the
+source panel. If you want to display a double quotation mark ("), enter "". When
+you use a double quotation mark (") in the source panel, the text following the
+double quotation mark is shifted to the left in the displayed panel. When the same
+hexadecimal values for these symbols are coded as part of double-byte character
+text surrounded with shift-out and shift-in control characters, they are not treated
+as attributes.<br><br><b>Using the + Attribute</b><br>
+                Be careful how you use the plus sign (+) for the color blue. If you want to assign
+the color blue to a variable defined by the NetView command list language,
+enclose the plus sign within a pair of single quotation marks as follows:<br><br>
+&COLOR = ’+’ To assign the color blue to the REXX variable A so that its contents, G, are
+changed to blue, do the following:<br><br>
+A = ’+G’<br> Without the pair of single quotation marks, the NetView program interprets the
+plus sign as a continuation character.<br><br>
+                <b>Using the $ and the @ Attributes</b><br>Because the $ character and the @ character are often used as data inside a
+command list or REXX variable, VIEW treats them differently when defined in a
+panel or in a variable. When in a panel, they are treated as attribute symbols as
+described in Table 11 on page 39 and Table 12 on page 39. When in a variable, they
+are treated as data. If the associated attributes are needed inside a variable,
+substitute the greater than (>) and less than (<)
+                                                  signs as synonyms for @ and $
+respectively. Use the respective synonym in your command list. In the following
+NetView command list example, the AMOUNT field displays the string $1,000 in
+turquoise and the HEIGHT field displays the string @ 6 feet in green.
+  &AMOUNT = ’<$1,000’<br>
+&HEIGHT = ’>@ 6 feet’<br> This is what the same example would look like in REXX.<br>
+AMOUNT = ’<$1,000’<br>
+HEIGHT = ’>@ 6 feet’ <br>When they are not used in a variable, the less-than and the greater-than symbols
+are displayed as characters  <br><br>
+                <b>Attribute Variables</b><br>Attribute variables are assigned in the command procedure that drives the view
+panel. An alternative to defining attribute symbols on the panel or within the
+variable data is to define attribute variables that are associated with panel
+variables. Attribute variables describe attributes associated with panel variables
+and their text following on the same line. Using an attribute variable provides a
+wider range for attribute selection and allows you to define input fields. When you
+use an attribute variable, the contents of the associated panel variable are not
+scanned for attribute symbols.<br><br>
+                An attribute variable name is formed by concatenating a dollar sign onto the front
+of the panel variable name. For example, in NetView command list language, the
+attribute for panel variable &V1 is defined in a variable called &$V1.<br><br>
+                In REXX, PL/I, and C, the ampersand (&) is not used. For a PL/I or C program,
+attribute variables must be set using CNMVARS in PL/I or Cnmvars in C.<br><br>
+                The following is the syntax for the contents of an attribute variable:<br><br>
+                ►► attribute variable = ' tv tv tv... ' ►◄<br><br>where tv is the type value pair. Multiple pairs of the same type in one attribute
+variable are allowed. The last pair is accepted and the previous pairs are ignored.<br><br>
+                The values for type value are as follows:<br>
+    tv =<br>
+    type value<br>
+A =<br>
+   Alarm<br>
+   AN No audible alarm<br>
+   AY Audible alarm (beep) when panel is presented<br>
+<b>Note:</b> The alarm specification applies only to the attribute variable for
+ the immediate message line ($CNMIMDL).<br>
+C =<br>
+    Color<br>
+    CB Blue<br>
+    CD The default device color when a color value is not specified<br>
+    CG Green<br>
+    CP Pink<br>
+    CR Red<br>
+    CT Turquoise<br>
+    CW White or neutral<br>
+    CY Yellow<br>
+F =<br>
+     Field<br>
+     FA Protected; data cannot be entered on displayed panel; FA is the default
+FI Unprotected; data can be entered on displayed panel<br>
+H =<br>
+                Highlight<br>
+         HB Flashing<br>
+       HD The default extended highlighting when a highlighting value is not
+specified<br>
+HR Reverse video<br>
+      HU Underscored<br>
+I =<br>
+Intensity<br>
+ID Dark, nondisplayable<br>
+IH High intensity<br>
+IN Normal intensity; the default when an intensity value is not specified<br>
+U =<br>
+Cursor<br>
+UN The cursor is not placed at the beginning of this field; UN is the
+default.<br>
+UY The cursor is placed at the beginning of this field. UY specifications for
+multiple variables cause the last variable specified to be accepted and
+the previous variables to be ignored.      <br>
+                <b>Note:</b><br>
+                1. If you do not want the cursor to be associated with a particular
+variable, you can place the cursor in any row and column. Use the
+VIEWICROW and VIEWICCOL variables in the procedure that calls
+VIEW with the INPUT option. See “Full-Screen Input Capabilities”
+on page 50 for more information on the VIEWICROW and
+VIEWICCOL variables.<br><br>
+2. If you use the VIEWICROW and VIEWICCOL variables and also
+specify UY on an attribute variable, the cursor is positioned by the
+attribute variable.<br><br>
+3. If you do not use the VIEWICCOL and VIEWICROW variables or
+specify a cursor for any attribute variable on a panel, the cursor is
+placed at the beginning of the first input field.<br><br>
+                Use one or more blanks to separate the type value pairs. The following is a NetView
+command list language example where &V1 is defined as a protected field with
+high intensity in red. &V2 is defined as a protected field in high intensity, in
+turquoise, with the cursor placed in the field.<br>
+       &$V1 = ’FA IH CR’<br>
+&$V2 = ’IN IH CT UY IH’<br>
+In the following REXX example, V1 is defined as an input variable (unprotected
+field) with no cursor. For V2, all the defaults are used.<br>
+$V1 = ’FI UN’<br>
+$V2 = ’ ’     <br>
+                Attributes defined by attribute variables or attribute symbols apply until one of the
+following is encountered:<br> . The explicit placement of an attribute symbol later in the line<br>
+. A variable later in the line that has one of the following:<br> – A valid corresponding attribute variable that specifies new attributes<br> – No valid corresponding attribute variable, but contains one or more attribute
+symbols<br>
+. The end of the line (or the end of the panel, if this is the last line).<br><br>Constants or variables defined on a panel can become part of an input field and
+are updated only when you type over some portion of the input field. When you
+enter data in an input field, the entire contents of the input field are assigned to
+the panel variable.<br><br>
+                The first byte of a field defined by a panel variable (the &) is used for attribute
+specification, and is followed by the contents of the variable. If an attribute
+variable corresponds to a panel variable, it takes effect at this first byte even if the
+panel variable is not found (and is replaced by blanks).<br><br>
+               <b> Note:</b> If an attribute variable contains a syntax error and the NetView log is active,
+message CNM944I is written to the log.<br><br>
+                <h15 style="border-top-style: solid;border-bottom-width: 2px;width: 100%;margin-left: 20%; margin-right: 20%;color:black; font-size: 20;"> Displaying Variables in Source Panels</h15><br><br>
+                When the VIEW command attempts to resolve a variable name coded on the panel
+definition, it searches the following environments in the following order until it
+finds a defined variable that contains a value:<br> . Variables assigned in the command procedure
+. Control variables (such as &OPID)<br>
+. Task global variables<br>
+. Common global variables<br><br>
+If a variable name specified on the panel is not defined to any of the previous
+environments, it is displayed as a string of blanks. Note that variables that are
+defined as control or global variables can also be assigned in the calling command
+procedure. The value assigned to it is displayed on the panel instead of the control
+or global variable value.<br><br>
+If the associated attribute variable is not defined, the substituted value of a
+variable is scanned for attribute symbols. The located attribute symbols are used in
+controlling color, highlighting, and data fields. If symbols are to be displayed as
+symbols and not used as attributes then code an associated attribute variable for
+the variables. This causes the symbols in the data to be treated as data instead of
+attribute variables.<br><br>
+When an attribute symbol is to be displayed as data, special rules must be
+followed. See “Displaying Special Attributes” on page 40 and “Attribute Variables”
+on page 40 for more information on these rules.<br><br>
+<b>Note:</b> If the XVAR option is not coded on the panel text indicator line, use only 1
+to 11 alphanumeric characters (A–Z and 0–9) for the variable names in VIEW panel
+definitions. If the XVAR option is coded, variable names can be up to 31 characters
+long and contain periods. See “Compound Symbols” on page 45 for more
+information. Alphabetical characters must be in uppercase. Variable names also
+must conform to any other variable naming conventions set by the language
+invoking VIEW if the variable is to be referenced by that language. For example,
+variable names used in PL/I, C, and REXX must start with an alphabetical
+character. <br><br>
+                Although global variables can be found and displayed using VIEW, they can also
+be referenced by the command procedure prior to running the VIEW command.Global variables are defined by &TGLOBAL, &CGLOBAL, or GLOBALV in
+NetView command list language, GLOBALV in REXX, CNMVARS or GLOBALV in
+PL/I, or <i>Cnmvars</i> or GLOBALV in C.<br><br>
+                <b>Reference:</b>Refer to <i>IBM Tivoli NetView for z/OS Programming: REXX and the
+NetView Command List Language or IBM Tivoli NetView for z/OS Programming: PL/I
+and C</i>for more information about global variables.<br><br>For the VIEW command to find local or attribute variables when invoked from a
+high-level language program, the variable must be set using CNMVARS in PL/I or
+Cnmvars in C.<br><br>
+                A REXX user can update the values of global variables using the VIEW command
+as long as the following tasks are performed for the variable varname before
+starting VIEW:<br>
+1. Define the field used by the global variable on the VIEW panel as an input
+field using an attribute variable.<br>
+ 2. Issue a GLOBALV DEFT (or DEFC) <i>varname</i> command to define the global
+variable.
+3. Ensure that <i>varname</i> is defined (having a non-null value) in the common or task
+global dictionary. Use GLOBALV PUTT (or PUTC) <i>varname</i> to store a value, if
+necessary. <br><br>
+                If all the steps just listed are followed, the global variable<i> varname</i> is updated.
+Otherwise, the REXX local variable <i> varname</i> is displayed and updated. When VIEW
+accesses a global variable this way, any REXX local variable with the same name is
+also modified by VIEW. In order to access the new value for a global variable, the
+REXX user must issue a command such as GLOBALV GETT (or GETC) to get a
+local copy of the value.<br><br>
+                If you specify a NetView control variable (for example, APPLID or OPID) on a
+VIEW panel, and the field is defined as an input field, the updated value is only
+stored in the command procedure environment. Control variable values cannot be
+updated.<br><br>
+The following REXX example shows how you can use VIEW to update a global
+variable:<br><br>
+                /* */<br>
+’GLOBALV GETT XYZ’<br>
+IF LENGTH(XYZ) = 0 THEN<br>
+DO<br>
+XYZ = ’ ’<br>
+’GLOBALV PUTT XYZ’<br>
+END<br>
+$XYZ = ’FI’<br>
+’VIEW NAME1 TESTPANL INPUT EXTEND’<br>
+SAY ’XYZ IS NOW’ XYZ<br>
+EXIT<br>
+                If the length of the value that is assigned to the variable exceeds the length of the
+variable in the source panel, the following rules apply:<br><br>v If the variable is followed by alphanumeric or special characters in the panel
+definition, such as !, ¢, \, ¦, @, #, $, %, ¬, &, ", +, the value is truncated.<br><br>. If the variable is followed by characters that are not alphanumeric, and are not
+among the special characters, such as !, ¢, \, ¦, @, #, $, %, ¬, &, ", +, the
+characters are overwritten by those of the value.<br><br>
+                . If the length of the value exceeds the space remaining in the line with line
+length that is determined by 3270 device (emulator) characteristics and the text
+indicator in the panel definition, for example, WIDE, the displayed value is
+truncated at the end of the line. The NetView program will not use multiple
+lines to display a value.<br><br>
+                If the value assigned to the variable contains double-byte text, all the double-byte
+text must be within DBCS shift-out and shift-in characters. If the panel cannot
+display all the double-byte text within a pair of DBCS shift-out and shift-in
+characters, VIEW displays all the text that fits and displays a period (.) to indicate
+a truncated character.<br><br> 
+                For example, if a variable named &DBCSTEXT is defined with a value of NetView
+Help Menu in Kanji, this value might be truncated because the field on the panel is
+too short, because the operator has scrolled the panel to the right or left, or
+because an application that uses VIEW has truncated data. For instance, the
+NetView WINDOW command uses VIEW to handle double-byte character
+truncation. Here is the hexadecimal representation of the double-byte Kanji
+characters, showing the text length:<br><br>....+....1....+....2....+....3..<br>
+04945494D4545444A4A4D444A4945450<br>
+E39363530343835323F373537373438F<br><br>
+            If the panel definition allows fewer than 32 characters for the value of &DBCSTEXT, or if the operator scrolls the text so that fewer than 32 characters can be displayed
+on the panel, VIEW displays all characters that will fit. If VIEW can only display
+one-half of a double-byte character, it substitutes a period (.) for the displayable
+part of the character in the same way that BROWSE handles leading and trailing
+double-byte text truncation for netlogs. In this example, if the first two bytes were
+truncated, VIEW would substitute a shift-out (X'0E') for the non-displayable last
+half of the first double-byte character (X'4399'). If the first three bytes were
+truncated, VIEW would substitute a period and a shift-out character (X'4B0E') for
+the entire second double-byte character (X'4356').<br><br>
+                If an operator tries to display a VIEW panel that does not have properly defined
+double-byte shift-out and shift-in pairs, a data stream that is not valid will be sent
+to the device, and unpredictable results, such as the operator being logged off, will
+occur. Examples of DBCS definitions in which the double-byte shift-out and shift-in
+characters are improperly matched:<br>
+. A greater number of shift-out or shift-in characters (not paired)<br>
+. One pair split between two or more variables<br>
+. One pair split between a variable and a panel definition<br>
+. One pair split across more than one line of a panel<br><br>
+                <b>Compound Symbols</b><br>
+                A compound symbol contains at least one period and at least one other character. It cannot start with a digit or a period. If there is only one period, the period
+cannot be the last character. <br><br>
+                The name begins with a STEM (part of the symbol up to and including the first
+period), which is followed by PARTs of the name (delimited by periods) that are
+constant symbols, simple symbols, or null. A constant symbol starts with a digit
+(0–9) or a period. A simple symbol contains no periods and does not start with
+digits (0–9).<br><br>
+                VIEW starts with a compound symbol coded in a panel. VIEW then creates a
+derived variable name by replacing PARTs with their values. VIEW then requests
+the value of the derived variable for display in the panel.<br>
+                <img style="width: 650px;height: 350px" src="i25.png"><br>
+                <b>Implementation Maximum</b><br>
+                All HLL and REXX variables are restricted to 31 characters when the panel text
+indicator has the XVAR option; otherwise, the limit is 11. NetView command list
+language does not support compound variables or variable names longer than 11
+characters. It is important to note the differences between the way REXX displays
+the string and the way VIEW displays the string.<br><br>
+                <b>Usage Notes</b><br>
+                1. VIEW does not support mixed case symbols defined in REXX. For example, a.c
+in Figure 6 is displayed as 5 in VIEW, but REXX will display it as Bill.<br><br>
+2. VIEW displays blanks for the value of the compound variable if the final value
+is undefined, null, or not valid.
+In Figure 6 a.a, c.a, and x.d.4 are displayed as blanks in VIEW.<br><br> 3. VIEW does not distinguish unknown compound variable PARTs from those
+with null values. When a PART is null or unknown, its NAME is used in
+building the compound variable name. In Figure 6, VIEW searches for &X.D.4,
+not &X..4, and thus cannot find Annie.<br>
+4. Enter *** XVAR in the text indicator section of your panel definition in order to
+use compound variables. See Text Indicator for more information.<br><br><br>
+            <h16 style="border-top-style: solid;border-bottom-width: 2px;width: 100%;margin-left: 20%; margin-right: 20%;color:black; font-size: 20;"> Issuing Commands from Command Procedures</h16><br><br>
+                When a command is issued directly from a command procedure, the procedure is
+suspended until that command completes. When the called command is complete
+and the return code is available, the procedure resumes. If the called command is a
+long-running command, it and the calling procedure form a group that is treated
+as a unit by the NetView ROLL command (roll group).<br><br>
+                <b>Note:</b> The BGNSESS FLSCN command is an exception because it allows a calling
+procedure to complete before the session begins by using the MINOR option of
+DSIPUSH. Refer to <i>IBM Tivoli NetView for z/OS Programming: Assembler</i> for
+information about DSIPUSH.<br><br>
+                Grouping commands and procedures is beneficial if the intent is to build a
+hierarchy of related panels, using different procedures to build each one. You
+should not group commands and procedures when running unrelated commands,
+such as those received from an operator. <br><br>To disassociate an unrelated command from the calling procedure, use the CMD
+command. To illustrate this, assume that the variable cmdline contains an operator's
+command that was entered on your panel. You can queue the cmdline command
+asynchronously by issuing one of the following in your REXX command
+procedure:<br>’CMD HIGH ’ cmdline<br>
+’CMD LOW ’ cmdlin<br><br>
+                The HIGH or LOW parameter of the CMD command indicates the priority at
+which the command should be queued.<br><br>
+               <b> Note:</b> Issuing the CMD command with the HIGH parameter usually interrupts
+other processing, allowing the queued command to run.<br><br>
+                For example, suppose an operator enters the STATMON command on the
+command line of your panel. By using the CMD command, you can queue the
+STATMON command rather than calling it directly. This allows the operator to roll
+back to your command procedure from STATMON, even though STATMON is not
+complete. Refer to <i>IBM Tivoli NetView for z/OS Programming: Assembler</i> for more
+information about the ROLL function and the NetView online help for more
+information about the CMD command.<br><br>
+                Queuing, rather than calling a command, protects your procedure from any reset
+condition the queued command encounters.<br><br>
+                <b>Creating a Rollable Component with VIEW</b><br><br>
+                A NetView component is a command or command procedure that controls the
+terminal's screen, provides for operator entry of arbitrary NetView commands, and
+is capable of resuming when such commands are complete. In a command
+procedure, you can create a rollable component using VIEW to provide the
+necessary screen control.<br><br>
+                If you specify the NOINPUT option, VIEW handles the operator command
+interface for you. If you specify the INPUT option on your VIEW command, VIEW
+returns the operator input to your procedure in the form of named variables, one
+or more of which might be treated as a command.<br><br>
+                The commands contained in these variables must be in uppercase for the NetView
+program. PL/I and C command procedures should verify that these command
+strings are in uppercase before issuing CNMCMD. The NetView command list
+language provides the UPPER command for translating the contents of a variable
+to uppercase. REXX command lists can use the UPPER instruction to ensure that
+commands are in uppercase.<br><br>
+                <b>Using the UPPER Command</b><br>
+                Use the UPPER command to change the contents of the specified variables to
+uppercase.<br><br>
+The format of the UPPER command is:<br><br>
+                <img style="width: 650px;height: 350px" src="i26.png"><br>
+                <b>Usage Notes</b><br>
+            1. Do not specify the leading ampersand (&) in front of the variable name.<br>
+2. If you specify more than one variable, all variables are translated, even if one of
+the variables has an error condition (not found or the length is not valid).<br>
+3. The UPPER command is provided in the NetView command list language only. A similar function is available to REXX command lists with the REXX UPPER
+instruction.<br>
+4. The UPPER command should not be concatenated with other commands in a
+command string.<br><br>
+<b>Return Codes:</b> The return codes for this command are as follows:<br><br>
+0 &nbsp;&nbsp;&nbsp;&nbsp;Successful completion of all specified variables<br>
+4 &nbsp;&nbsp;&nbsp;&nbsp;At least one variable not found, or at least one variable is not valid<br>
+8 &nbsp;&nbsp;&nbsp;&nbsp;At least one variable length not within range<br>
+12 &nbsp;&nbsp;&nbsp;&nbsp;At least one variable not found and at least one other variable length not
+within range<br>
+16 &nbsp;&nbsp;&nbsp;&nbsp;Not invoked from a command procedure<br>
+20 &nbsp;&nbsp;&nbsp;&nbsp;No variables specified<br>
+                <b>Using the UNIQUE Command</b><br><br>
+                With the UNIQUE command, you can search the roll stack for a component that
+has a subcomponent with the same member name (for command lists and REXX)
+or module name (for PL/I and C) as the issuing command procedure. If such a
+component is found, the UNIQUE command allows only one of the two
+components to remain on the roll stack, either the issuing component or the older
+component.<br><br>
+                The format of the UNIQUE command is:<br>
+                <img style="width: 650px;height: 200px" src="i27.png">
+            
+           <b> CANCEL</b><br>
+Specifies to reset (CANCEL) the roll group containing the matching element on
+the roll stack as the currently running component. CANCEL is the default.
+(The issuing component remains on the roll stack.)<br>
+<b>PROMOTE</b><br>
+Specifies to position (PROMOTE) the roll group containing the matching
+element on the roll stack as the currently running component.<br>
+<b>Usage Notes</b>
+1. The UNIQUE command is valid only when issued from a command list.<br><br>
+2. The NetView program allows an operator to start many copies of the same
+command processor. You might not want more than one copy, as when
+creating a NetView component. By using DSIPOP or DSIPUSH with the
+PROMOTE option, assembler programmers guarantee the uniqueness of
+long-running commands. Using the UNIQUE command guarantees
+uniqueness in a command procedure.<br><br>
+3. Issuing UNIQUE from your procedure has no effect (and gives a return code
+of 0) if the current copy of the procedure is the only one active. An active
+long-running command or procedure is one that is in any stage of its
+processing but is not yet complete. Active procedures include procedures that
+are suspended (blocked) by some other long-running command. If another
+copy of the same procedure exists under the same task, the UNIQUE
+command affects the entire roll group that includes that copy.<br><br> 4. When you use UNIQUE with the CANCEL option (the default format), the
+calling procedure is temporarily suspended while the older copy is given
+control with a reset condition. The NetView program suppresses the
+cancellation messages normally issued when a procedure is reset. When the
+canceled copy of the procedure and any others in its group complete, the
+issuing copy resumes with the next line after the UNIQUE command. The
+return code is set to 4.<br><br>
+5. Using the UNIQUE command with the PROMOTE option moves the previous
+copy of the calling procedure and its roll group to the top of the roll stack,
+ready to resume when the copy issuing UNIQUE completes. The return code
+is set to 4. The procedure invoking UNIQUE should exit to allow the
+promoted procedure to regain control. An exit code -5 is used to let the caller
+know that it can now regain control.<br><br>
+6. When you use UNIQUE in NetView command list language, code a
+suppression character (&SUPPCHAR) to suppress unwanted command echoes
+that occur when the command has an error. Code SIGNAL ON HALT in your
+REXX procedures to suppress the REXX cancellation message. The HALT
+subroutine should return a -5 return code. When you code SIGNAL ON
+ERROR in your REXX procedures, a return code of 4 signals the error label.<br><br>
+        7. No special processing is required for the ROLL command. It is issued in the
+same way as other NetView commands. To be consistent with other NetView
+applications, set PF6 and PF18 to issue the ROLL command.<br><br>
+8. Parameter synonyms are supported.<br><br>
+9. Parameter authorization restrictions are not appropriate for the UNIQUE
+command.<br><br>
+10. Upon cancellation of a component, REXX, PL/I, and C command procedures
+can perform a cleanup.<br><br>
+<b>Return Codes:</b> The return codes for this command are as follows:<br><br>
+0 &nbsp;&nbsp;&nbsp;&nbsp;The calling procedure is unique.
+4 &nbsp;&nbsp;&nbsp;&nbsp;A matching procedure was found. Action successful.
+12&nbsp;&nbsp;&nbsp;&nbsp; Environment is not valid (not called from a procedure).
+16 &nbsp;&nbsp;&nbsp;&nbsp;Syntax error, argument is not valid.<br><br>
+                <h17 style="border-top-style: solid;border-bottom-width: 2px;width: 100%;margin-left: 20%; margin-right: 20%;color:black; font-size: 20;"> Full-Screen Input Capabilities</h17><br><br>
+                The VIEW command can receive the following values from the calling procedure:<br><br> . The cursor row position<br>
+. The cursor column position<br><br>
+You specify this information with the INPUT keyword and by coding
+VIEWICROW and VIEWICCOL in the calling procedure. When the panel is
+displayed, the cursor is positioned at the location specified by VIEWICROW and
+VIEWICCOL. If you used an attribute variable to associate the cursor with a
+variable, that overrides cursor positioning by VIEWICROW and VIEWICCOL.
+Table 13 on page 51 describes these two variables.<br><br>
+The VIEW command allows the following to be returned to the invoking
+procedure:<br><br> . The contents of multiple input-capable variables on a panel<br> . The attention identifier (AID) information<br>
+. The cursor location<br>
+. The number of panel rows put out by the VIEW command<br>
+. The number of panel columns put out by the VIEW command<br><br>
+                You specify this information with the INPUT keyword and by coding an attribute
+variable with the FI type value pair.<br><br> When you use the INPUT option, an input field is available only if you defined an
+attribute variable specifying FI. (See “Attribute Variables” on page 40 for
+information on the type value pair.)<br><br>
+When the panel is displayed, it contains the variable values that you can modify
+by typing over them. The modified variables are returned to the invoking
+procedure when you press the AID key. Note that if a variable's value is originally
+truncated for a display, the modified truncated value would be used to set the
+variable at this time. Table 14 on page 51 describes the AID key and the variables
+that are set on return to the calling command procedure.<br>
+                <img style="width: 650px;height: 750px" src="i28.png"><br>
+                <img style="width: 650px;height: 400px" src="i29.png"><br>
+                The contents of the VIEWAID variable are defined as PF1 through PF24, PA1, PA2,
+PA3, or the ENTER key. If you press PA1, PA2, or PA3, only the AID (VIEWAID) information is returned to
+the invoking procedure.<br><br> The cursor row, column locations, and any input fields
+defined on a panel are not returned.<br><br>
+<b>Note:</b> If you press the ATTN key on an SNA terminal, VIEW with
+INPUT/NOINPUT ends.<br><br>
+Figures Figure 8 on page 53 through Figure 11 on page 56 illustrate source panels
+using VIEW with the INPUT option to create a rollable component. Figure 8 on
+page 53 and Figure 9 on page 53 show the source panels containing input-capable
+variables to be replaced. These panels use attributes from attribute set 2 (see
+Table 12 on page 39).<br><br>
+                <img style="width: 650px;height: 750px" src="i30.png"><br>
+                "Example of a REXX Command List that Drives a Rollable Component” on page
+54 is an example of a REXX command list that invokes VIEW with the INPUT
+option to display PANEL1. The command list assigns initial values to the VARIN1 and VARIN2 input-capable variables in the source panel. The command list also
+returns the AID information and command line input to the caller.<br>
+                <img style="width: 650px;height: 750px" src="i31.png"><br>
+                <img style="width: 650px;height: 400px" src="i32.png"><br>
+                Figure 10 on page 56 is an example of the first panel created from this command
+list. See Figure 8 on page 53 for the source for this panel. The variables VARIN1
+and VARIN2 are replaced with the actual values INITIALIZE 1 and INITIALIZE 2,
+respectively. The attribute specification is defined by $VARIN1 and $VARIN2 (see
+“Attribute Variables” on page 40 for more information).<br><br>
+The following attributes are for VARIN1 where the length of the input field
+continues until the next attribute symbol is encountered. In this case, the attribute
+symbol is %.<br><br>
+VARIN1 attributes are as follows: v Input, tab (unprotected)<br>
+. Normal intensity<br>
+. Red<br>
+. Flashing<br>
+. No cursor position<br><br>
+The following attributes are for VARIN2 where the length of the input field
+continues until the end of the line.<br><br>
+VARIN2 attributes are:<br> . Input, tab (unprotected)<br>
+. High intensity<br>
+. Green<br>
+. Reverse video<br>
+. No cursor position<br><br>
+COMMAND attributes are:<br> . Input, tab (unprotected)<br>
+. Position the cursor at the beginning of this field<br><br>
+                <img style="width: 650px;height: 750px" src="i33.png"><br><br>
+                <h18 style="border-top-style: solid;border-bottom-width: 2px;width: 100%;margin-left: 20%; margin-right: 20%;color:black; font-size: 20;"> Returning Command Line Input</h18><br><br>
+                When you specify NOINPUT for the NetView program to start processing at the
+command line, you should define a tilde (~) on the panel to be displayed.<br><br>
+                The tilde definition defines an input field that is returned to the NetView program
+as a command. An &CUR coded after the tilde on the same line determines where
+the cursor is positioned.<br><br>
+The &CUR is useful for predefining a partial command. For example: ~ V NET,ACT,ID=&CUR
+coded on a panel displays:<br><br>
+V NET,ACT,ID=_<br><br>
+with the remaining ID to be completed by the operator. If more than one is defined on the panel, the last &CUR is processed and previous
+ones are ignored.If more than one tilde (~) is defined on the panel, the first tilde is
+processed and any subsequent ones are changed to a percent (%) sign.<br><br>
+If you specify INPUT for the NetView program, code the command line as you
+would code any other input-capable field. Do not use the &CUR and tilde
+definitions. The procedure that displays the panel issues the commands. See
+“Issuing Commands from Command Procedures” on page 46 for information on
+issuing CMD HIGH.<br><br>
+            <h19 style="border-top-style: solid;border-bottom-width: 2px;width: 100%;margin-left: 20%; margin-right: 20%;color:black; font-size: 20;"> Using PF Keys and Subcommands with VIEW</h19><br>
+                PF keys and VIEW subcommands are treated differently with the two view
+options, INPUT and NOINPUT. The following two sections explain the differences.<br><br>
+                <b>Using PF Keys and Subcommands with the NOINPUT Option</b><br><br>
+                When you use VIEW with the NOINPUT option, you can define your PF keys
+using the PFKDEF command. The values you assign can be NetView commands,
+or VIEW subcommands. The following is a list of the VIEW subcommands; some
+have the same name as similar NetView commands:<br><br>
+                <b>Help</b> Displays the help panel previously coded:<br>
+HELP=helppan<br>
+<b>End</b> Exits to the originating component.<br>
+<b>Return</b><br>
+Returns to the last panel from which a selection was made.<br>
+<b>Top </b>Returns to the first page of a multipage panel.<br>
+<b>Bottom</b><br>
+Goes to the last page of a multipage panel.<br>
+<b>Backward</b><br>
+<b>Returns</b> to the previous page of a multipage panel.<br>
+In addition to assigning the Backward subcommand to a PF key, you can
+also enter the following command on the command line to scroll backward
+a specific number of pages:<br>
+<b>B</b> n Scrolls backwards n number of pages or panels.<br>
+<b>Forward</b><br>
+Goes to the next page of a multipage panel.<br>
+            In addition to assigning the Forward subcommand to a PF key, you can
+also enter the following command on the command line to scroll forward a
+specific number of pages:<br><br>
+<b>F</b> n Scrolls forward n number of pages or panels.<br>
+<b>Entry Point</b><br>
+Shows the panel that the operator first saw upon entry to help.<br>
+<b>Reference:</b> Refer to the PFKDEF command in the IBM Tivoli NetView for z/OS
+Administration Reference for more information.<br><br>
+                <b>Using PF Keys and Subcommands with the INPUT Option</b><br>
+                When you use VIEW with the INPUT option, you can use settable PF keys defined
+using the PFKDEF command or you can interpret PF keys in your command list.
+You need to code the panel definition and parameters differently depending on the
+option you select.<br><br>
+                <b>Using Settable PF Keys</b><br>
+                To use settable PF keys with VIEW, complete each of the following steps:<br>
+1. In the panel definition, create a variable named CNMIMDL that has no
+attribute-variable ($CNMIMDL) which makes it an input field. Define the
+immediate message line by putting &CNMIMDL in column 1 of the line. Do
+not put anything else on that line.<br><br>
+If the VIEW application has not provided a value for CNMIMDL, VIEW
+searches the global dictionaries (task, then common) for a variable named
+CNMIMxxx, where xxx is the application name provided when VIEW was
+invoked. If this variable is not found, VIEW searches for CNMIMVIEW in the
+same dictionaries. This is similar to the way keys are set for VIEW applications.
+Finally, if none of these variables are present, the text from message BNH257I is
+used.<br><br>
+2. In the panel definition, create a variable named CNMCMDL that does have an
+attribute-variable ($CNMCMDL) which makes it an input field. CNMCMDL
+defines the command area.<br><br>
+3. Optionally, create another variable named CNMDIMD to define a default
+immediate message. This message is displayed by the NetView program
+whenever the CNMIMDL message has been displayed and there are no other
+immediate messages. If you do not create CNMDIMD, the NetView program
+defaults it the same way it defaults CNMIMDL.<br><br>
+All these variables support attribute ($) variables.<br><br>
+For example, you might call VIEW with an error message in CNMIMDL and a
+default message in CNMDIMD, with $CNMIMDL set to CR and $CNMDIMD set
+to CG. The error message will be displayed in red, but if the user presses a
+RETRIEVE key or delay-type key, for example, the red message is replaced by the
+default message, in green.<br><br>
+The REXX command WINDOW is a good example of coding VIEW panels to set
+PF keys. Enter BROWSE WINDOW to see the REXX source for this command.<br><br>
+<b>Notes:</b><br>
+1. VIEW-input applications that do steps 1 and 2 always have their VIEWAID
+variable set to ENTER after invoking VIEW, because other keys are converted
+as if the user typed the command text and pressed ENTER.<br><br>
+2. The &CNMIMDL variable is nulled out when control is returned to the
+command list from VIEW, if VIEW detected that the immediate message area
+was overwritten by the NetView program after the VIEW panel was output (for
+example, by an immediate command entered by the operator).<br><br>
+3. The special variables CNMIMDL and CNMDIMD are supported in
+VIEW-noinput as well as VIEW-input. CNMCMDL only has special meaning in
+VIEW-input.<br><br>
+                <h20 style="border-top-style: solid;border-bottom-width: 2px;width: 100%;margin-left: 20%; margin-right: 20%;color:black; font-size: 20;"> Dynamic Ability Capabilities</h20><br>
+                Use the VIEW command to dynamically update the contents of the panel being
+displayed. The updates can be controlled by:<br>
+                <b>. The calling procedure</b>
+When using EXTEND mode, if VIEW detects that a message TRAP is satisfied,
+VIEW returns control to the calling procedure to allow the update of local
+variable values displayed on the VIEW panel. VIEW refreshes the display with
+the new values when control is returned to VIEW using the RESUME command.<br><br> 
+                <b>. Any automation or procedure running on the same task</b>
+If the variables named on your VIEW panel are not defined by the calling
+procedure, VIEW attempts to read values from task global variables. For more
+information, refer to the online help for the GLOBALV command and the PIPE
+VAR stage. Values of task global variables can be updated by any procedure
+called on the same task (same operator ID) and VIEW immediately refreshes the
+display when the procedure completes.<br><br> 
+                <b>. Any procedure in the NetView program</b>
+If the variables named on your VIEW panel are not defined by the calling
+procedure and do not exist as task global variables, VIEW attempts to read
+values from common global variables. For more information, refer to the online
+help for the GLOBALV command and the PIPE VAR stage. Any procedure in the
+NetView program can update the values of common global variables; however, VIEW refreshes the display only when an event (such as receipt of a message)
+occurs at the task that started VIEW.<br><br>
+                While a panel is displayed, automation from timers, messages, or alerts can drive
+command procedures that update some of the variables substituted into the
+displayed panel. Any processing under the OST where the panel is displayed
+causes a dynamic update of the panel with new values for any variables that have
+changed.<br><br>
+To make information on the panel easier to see, and make it easier to enter
+information on the panel while a panel is dynamically updated, assign values to
+attribute variables for all variables on the panel that can be changed dynamically. This enables VIEW to send only the updated information to the screen without
+rewriting the entire screen for each update.<br><br>
+When VIEW detects certain changes to common, task, and local variables or their
+associated attribute variables, VIEW must rewrite the entire panel.<br><br>
+                If the entire screen is redisplayed, changes typed by the operator on the screen
+being redisplayed are lost. Following is a list of these changes:<br><br> . The attribute variable for a given data variable has changed to indicate that a
+field has been changed from protected to unprotected or vice versa.<br><br> . An attribute variable for a given data variable now has a valid value. It either did not exist or it had a value that is not valid.
+                . An attribute variable for a given data variable now has no value or a value that
+is not valid. It previously had a valid value.<br><br> . The value for a data variable has changed, and a valid attribute variable is not
+associated with the data variable.<br><br>
+To continue processing of the VIEW command after variables used by the
+displayed panel are updated, use the RESUME command.<br><br>
+                <h21 style="border-top-style: solid;border-bottom-width: 2px;width: 100%;margin-left: 20%; margin-right: 20%;color:black; font-size: 25;">Sample of Panel Updating</h21><br>
+                The following figures show the dynamic updates of the contents of a panel.<br><br>
+“Example of a REXX Command List to Update a Panel” is an example of a
+command list called RESDYN which is shipped as part of sample CNMS1101.
+RESDYN uses the RESOURCE command output as data to be displayed in a panel
+using the VIEW command. The displayed data is updated on a time interval that
+you specify when calling the command list. The default time interval is 10 seconds.
+Note that this example of the VIEW issued for the RESDYN function (option 12)
+uses the EXTEND parameter in order to make use of the NetView for z/OS
+Version 5 Release 1 extended functionality.<br><br>
+                <img style="width: 650px;height: 750px;" src="i34.png"><br>
+                <img style="width: 650px;height: 750px;" src="i35.png"><br>
+                <h22 style="border-top-style: solid;border-bottom-width: 2px;width: 100%;margin-left: 20%; margin-right: 20%;color:black; font-size: 25;">Sample of Panel Updating</h22><br><br>
+                The template shown in “BROWSE Command Panel Definition Showing Color
+Attributes” is used when browsing members of a partitioned data set. Note the
+various applications of the color attributes shown in Table 11 on page 39 and
+Table 12 on page 39. The characters %, $, ¬, and + each assign a specific color to
+the screen area immediately following their positions. To change a color area on
+the screen, you need only change the color attribute. You can change only existing
+attribute fields; changing any other field can result in errors when browsing.<br><br>
+                <img style="width: 650px;height: 750px;" src="i36.png"><br>
+                <img style="width: 650px;height: 250px;" src="i37.png"><br>
+                <h23 style="border-top-style: solid;border-bottom-width: 2px;width: 100%;margin-left: 20%; margin-right: 20%;color:black; font-size: 25;">Chapter 4. Modifying and Creating Online Help Information</h23><br>
+                The NetView program contains a help facility, which has two types of help
+information.<br>
+The first type of help is view-based help, which is displayed by using the VIEW
+command. The second type is window-based help, which is displayed by using the
+WINDOW command.<br>
+This chapter explains how you can add, delete, or modify help information and is
+arranged in the sequence you use to accomplish this. The sequence follows:<br><br>
+1. Locate the help source file.<br>
+2. Copy and change the source file.<br>
+3. Store the copy.<br> 4. Display the help to test your changes.<br><br>
+                <h24 style="border-top-style: solid;border-bottom-width: 2px;width: 100%;margin-left: 20%; margin-right: 20%;color:black; font-size: 25;">Locating Help Source Files</h24><br><br>
+                <b>Source</b> files define the panel contents that are displayed.<br><br>
+Help information is contained in a separate file and is shipped as a member in a
+partitioned data set (PDS). English help source files are stored in the
+NETVIEW.V6R2M1.CNMPNL1 data set.<br><br>
+<b>Notes:</b>
+1. Japanese help source files are stored in the NETVIEW.V6R2M1.SCNMPNL2
+data set.<br><br>
+2. Copies of the command and message help are stored on the web server. If you
+customize the command and message help in NetView data set members, you
+may want to make the same changes to the web server files.<br><br>
+Verify that your organization has not changed the library name.<br><br>
+Before you create a new help source, try to locate an existing online help that is
+similar to the one you want to create. Generally, when you have a help source file
+displayed, the file name is in the upper left corner.<br><br> For command help information, you can locate the source file you want to change
+by browsing the HELPMAP. Window-based help files are prefixed with the <
+character. See “HELPMAP Facility” on page 70 for more information on the
+HELPMAP. Help information for groups of messages is stored as members of the
+PDS, one member for each group. The member name is determined by truncating
+the message ID prior to the last numeric digit. For example, help for messages
+DSI001I and DSI002I is stored in member DSI00. Help for message EKGV68001I is
+stored in member EKGV6800.<br><br>
+If a message or command help panel is currently being displayed, you can use the
+SHOWDATA command to locate the source file. Figure 14 on page 66 displays the
+information returned after entering SHOWDATA on the command line.<br><br>
+<b>Note:</b> In Figure 14 on page 66, the following are true:<br><br>
+                1. The panel is located in member EUYCLIST of the CNMPNL1 data set.<br><br>
+2. The !+! listed in the response from the SHOWDATA command is generated by
+special processing from the help search procedure and can be ignored.<br>
+                <img style="width: 650px;height: 450px;" src="i38.png"><br>
+                <b>View-Based Help</b><br><br>
+                The source file contents include the text of the displayed panel and the definition
+statements associated with the panel. A definition statement includes:<br><br> . A prologue<br>
+. The help panel name<br>
+. The continuation panel name<br>
+. A list of associated help panels<br><br>
+To view the source file for a View-based help panel, enter:
+BROWSE CNMPNL1.panelid<br><br>
+Where panelid is the name that is displayed in the upper-left corner of the source
+for the help. For additional information, see “Creating Full-Screen Panels” on page
+31.<br><br>
+                <b>Window-Based Help</b><br><br>
+                Figure 15 on page 67 is an example of the source format of the Window-based help
+information. Descriptions of each numbered field follow the figure.<br>
+                <img style="width: 650px;height: 750px;" src="i39.png"><br>
+                Example of Source for Message and Command Help Information<br><br>
+                <b>1 Prologue</b><br>
+An optional section for programmer comments.<br>
+<b>2 Message or Command</b><br>
+The message or command to which the text applies. If the help information is for a command that can be used in more than one component, the command name is prefixed with the component name. Command names
+must be preceded by 14 equal (=) signs and a blank space.<br><br>
+               <b> Message or Command Help Title</b><br>
+The title of this help source file.<br>
+<b>Tags</b><br>
+    Information can be presented in different ways. These can include:<br> . :H2. is used to highlight command names.<br><br> . :XMP. and :EXMP. are used to surround examples.<br><br> . :IF DTYPE=PANEL followed by :ENDIF marks a section that is shown
+when HELP presents a full-screen display.<br><br> . :IF DTYPE=MSGS followed by :ENDIF marks a section that is shown
+when HELP presents a line mode display. This occurs when HELP is
+called at an autotask or when full-screen displays are otherwise
+unsupported.<br><br>. :LINK. is used to move from one topic to another. The :LINK. tag must
+be in uppercase and begin in column one; it precedes the display line to
+which it pertains. This line becomes a tab stop and is highlighted by
+WINDOW. If more than one line of text is to be highlighted for linking,
+the :LINK. tag must precede each line. See the example coding in
+Figure 16 on page 69. The operator makes a selection by placing the cursor on the line or by
+issuing a FIND command that selects the line. Optionally, you can
+designate a keyword that the operator can type to issue the command.
+The keyword is enclosed in parentheses immediately following the
+:LINK. tag.<br><br> . :CMD. is used to precede a command that can be executed immediately
+when that line is selected. The command line can contain variable text
+(for example, HELP msgno) that the operator can overlay with specific
+data, then press the ENTER key to execute the command. The :CMD. tag
+has an end tag, :ECMD., and must follow the line of command text. Both
+:CMD., and its end tag must be in uppercase and begin in column 1.<br><br>
+A portion of EUYSLIST is shown in Figure 16 on page 69 to show how the
+:IF DTYPE and :LINK. statements are coded.<br>
+                <img style="width: 650px;height: 450px;" src="i40.png"><br>
+                <h25 style="border-top-style: solid;border-bottom-width: 2px;width: 100%;margin-left: 20%; margin-right: 20%;color:black; font-size: 25;">Copying and Changing Help Source Files</h25><br>
+                Before you create a new help source file, try to locate an existing online help file
+that is similar to the one you want to create. See “Locating Help Source Files” on
+page 65.<br><br>
+                If you find a comparable panel, copy it using a screen editor. Change the panel by
+typing over the existing text or by adding text. If you cannot find a similar online
+help file, use a screen editor to build a new one.<br><br>
+                If you want to modify or create a help source file while the NetView program is
+running, define your panel data set without secondary extents. Otherwise, a panel
+can be filed in a new extent, requiring that you close and restart the NetView
+program to use the panel.<br><br>
+                The conventions for structuring a new panel are the same as those for modifying
+an existing panel. All help source files must have a fixed-length blocked record
+format and a logical record length of 80 bytes (RECFM=FB, LRECL=80), unless you
+are using a fully qualified data set name listed in the HELPMAP. See “HELPMAP
+Facility” on page 70 for more information. Null characters are also counted within
+this 80-byte record. In addition, you might need to change a command list or
+another panel that is affected by your new panel.<br><br>
+                You can customize the HELPDESK to include topics specific to your installation.
+The NetView program provides a template file, CNMHDSKU, that can be edited to
+create these topics.<br>
+                1. Add the new topics to CNMHDSKU.<br>
+2. Add the new topic identifiers to the table of contents in file CNMHDSK0<br>
+                <b>Note:</b>If you want to customize any of the existing HELPDESK files
+(CNMHDSK1–CNMHDSK9), put the information in a separate file and use the
+%INCLUDE statement. Otherwise, that information will need to be added each
+release.<br><br>
+                After creating or modifying a help file, store it in a data set concatenated to
+DDNAME CNMPNL1. As an alternative, you can also modify the panel with an
+SMP USERMOD. See “Storing Help Source Files” for more information.<br><br>
+                <h25 style="border-top-style: solid;border-bottom-width: 2px;width: 100%;margin-left: 20%; margin-right: 20%;color:black; font-size: 25;">Storing Help Source Files</h25><br><br>
+                Ensure that your panel names do not use the same prefixes used by the panel
+names that are supplied with the NetView program.<br><br>
+                Store all help source files that you create or modify. Two methods for storing help
+files follow:<br><br>
+                . Concatenate the user partitioned data set that contains the modified help file to
+the CNMPNL1 DD statement in the NetView startup procedure before the data
+set NETVIEW.V6R2M1.CNMPNL1. If the Support Center modifies the panel,
+those changes will not be added to your help file.<br><br>
+                . Include your modified help file into a System Modification Program (SMP)
+USERMOD and apply the USERMOD so that SMP stores the modified panel in
+NETVIEW.V6R2M1.CNMPNL1. SMP automatically notifies you of any future
+changes that the Support Center makes to the panel you modified. For more
+information on how to use an SMP USERMOD, refer to the System Modification
+Program library.<br><br>
+                <b>Note:</b>
+1. The default data set for the Japanese version of the product is
+NETVIEW.V6R2M1.SCNMPNL2.<br>
+2. English help source files are stored in the NETVIEW.V6R2M1.CNMPNL1 data
+set. Verify that your organization has not changed the library name.<br><br>
+                <h26 style="border-top-style: solid;border-bottom-width: 2px;width: 100%;margin-left: 20%; margin-right: 20%;color:black; font-size: 25;">HELPMAP Facility</h26><br><br>
+                The HELP command scans the HELPMAP for the required command help member
+name using the arguments as search targets. HELP uses the arguments in the
+following manner:<br><br>
+                . With no arguments<br>
+When you enter HELP without supplying any arguments, you get
+component-level HELP for the component you are in.<br>
+If the target arguments are not found in the table, HELP searches for a pair of
+parentheses () and uses the associated panel name.<br><br> . With one argument<br>
+When one argument is supplied, HELP attempts to resolve the argument as a
+command synonym, if possible.<br><br> . With two or three arguments<br>
+When two or three arguments are supplied, the search target is constructed by
+concatenating the arguments with commas. For example:<br><br>
+ONE,TWO,THREE<br><br>
+                HELPMAPU is a specific HELPMAP for user-defined help files created for
+commands. A %INCLUDE statement contained in HELPMAP embeds HELPMAPU
+that provides the mapping for those help files created by the user.<br><br>
+                <b>Note:</b> Do not map user-defined help files to HELPMAP. These changes interfere
+when IBM applies maintenance to HELPMAP.<br><br>
+                A portion of CNMHELPF is shown in Figure 17 to show how the help names are
+listed. Those that are prefixed with the < character are window-based help files;
+others are view-based help files.<br><br>
+                <img style="width: 650px;height: 450px;" src="i41.png"><br>
+                You can add fully qualified data set names within single quotes to the HELPMAP. See the following example as a guide: < ’USER.CNMPNL1(MYCMDHLP)’ MYCOMAND<br><br>
+                <h27 style="border-top-style: solid;border-bottom-width: 2px;width: 100%;margin-left: 20%; margin-right: 20%;color:black; font-size: 25;">Displaying New Help Panels</h27><br><br>
+                After you have created a new help panel, use the HELP command to view the new
+panel, and any associated commands or panels, to ensure that they display
+properly.<br><br>
+                <h28 style="border-top-style: solid;border-bottom-width: 2px;width: 100%;margin-left: 20%; margin-right: 20%;color:black; font-size: 25;">Chapter 5. Customizing Session Monitor Sense Descriptions</h28><br><br>
+                The NetView program provides help for VTAM sense codes through the session
+monitor SENSE command. You can request help for either 2-byte or 4-byte sense
+codes. The information used to present explanations for the sense codes is stored
+as a set of members in the DSIPARM data set. You can customize these members
+or include additional members to include help for sense codes that have additional
+meaning for a specific application.<br><br>
+                <h29 style="border-top-style: solid;border-bottom-width: 2px;width: 100%;margin-left: 20%; margin-right: 20%;color:black; font-size: 25;">Session Monitor Sense Codes</h29><br><br>
+                The session monitor sense code descriptions are stored as DSIPARM members
+named CNMB<i>nnn</i>, where <i>nnn</i> is the first three hexadecimal digits of the 2-byte and
+4-byte sense codes described in the member. For example, help for sense codes
+08B2 and 08B60001 is stored in DSIPARM member CNMB08B. The CNMB08B
+member shipped with the NetView product is shown in Figure 18 on page 74.<br><br>
+                The general conventions are:<br><br> . The descriptions are first grouped by the leftmost two bytes of the sense code,
+using a separator of $$$KEY xxxx???? where xxxx is the hexadecimal value of
+the leftmost two bytes. The description of the 2-byte sense code xxxx (or 4-byte
+sense code xxxx0000) follows this separator.<br><br> . Extended sense code descriptions, identified by the rightmost two bytes of a
+4-byte sense code, are grouped using a separator of $nnnn where nnnn is the
+hexadecimal value of the rightmost two bytes. The extended description follows
+this separator.<br><br> . Text descriptions must be contained in columns 1–57 of the DSIPARM member. This text is not DBCS-enabled.<br><br>
+                <b>Note:</b> Any modifications you make to existing DSIPARM CNMBxxx members may
+be replaced by maintenance or another release of the NetView product. You can
+update the comments at the beginning of the DSIPARM CNMBxxx members to
+document your changes, and store any members you create or modify in a data set
+concatenated before the DSIPARM data set that is supplied with the NetView
+program. This helps keep your modifications from being overlaid by subsequent
+maintenance or product changes.<br>
+                <img style="width: 650px;height: 750px;" src="i42.png"><br>
+                <img style="width: 650px;height: 750px;" src="i43.png"><br>
+                <h30 style="border-top-style: solid;border-bottom-width: 2px;width: 100%;margin-left: 20%; margin-right: 20%;color:black; font-size: 25;">Chapter 6. Customizing Hardware Monitor Displayed Data</h30><br><br>
+                This chapter describes how to modify the presentation of generic and nongeneric
+alerts. In prior releases of the NetView program, Recommended Action panels,
+Event Detail panels, and alert messages were stored at the host. Each nongeneric
+alert had a unique set of panels and messages. Many of these remain in the current
+release of the NetView program. With generic alerts, generic alert code points are
+used to dynamically build the hardware monitor panels.<br><br>
+                This chapter describes how to do the following:<br><br> . Modify the text of nongeneric Recommended Action and Event Detail panels<br>
+. Modify nongeneric alert messages<br>
+. Overlay recommended action numbers from a generic alert v Control the use of color and highlighting for hardware monitor panels<br>
+. Include user-defined errors, such as creating and modifying generic code points
+or adding resource types to the hardware monitor<br><br>
+              <b>  Note:</b> Color maps for hardware monitor help panels and command description
+panels are available only in prior releases of the NetView program.<br><br>
+If your panels or alert messages have been translated into a language that requires
+double-byte characters, take care to preserve the integrity of the double-byte
+character set (DBCS) strings.<br><br>
+                <h31 style="border-top-style: solid;border-bottom-width: 2px;width: 100%;margin-left: 20%; margin-right: 20%;color:black; font-size: 25;">Modifying Hardware Monitor Nongeneric Panels</h31><br><br>
+                Recommended Action panels and Event Detail panels are defined for event
+conditions that are not based on generic alert records. If several event conditions
+use the same Recommended Action panel or Event Detail panel, the panel is
+physically defined under a single name, the <i><b>actual panel name</b></i>. Any other name
+under which the actual panel can be displayed is the <i><b>panel alias</b></i>. Determining
+whether the panel name is an actual name or an alias is the first step in modifying
+panel text.<br><br>
+                You can make changes to the panel text, and these changes are reflected in all its
+aliases. You can also make changes to a panel alias, resulting in the creation of a
+new panel under the former alias name.<br><br>
+                <h32 style="border-top-style: solid;border-bottom-width: 2px;width: 100%;margin-left: 20%; margin-right: 20%;color:black; font-size: 25;">Determining a Panel Name</h32><br><br>
+                To determine a panel name and whether it is a panel name or an alias, you must
+know the event associated with the text you want to change and then identify a
+resource for which the event is logged. Use the following steps as a guide to help
+you determine the type of name:<br><br>
+                1. To identify a resource, display the Alerts-Static, Alerts-History, or Most Recent
+Events panel.<br><br>
+2. Enter sel# C, where sel# is the selection number on the panel of the event
+associated with the text you want to change. Message BNJ962I displays a
+5-digit code associated with the event. If message BNJ378I is displayed, the
+event is generic and stored panels are not associated with the event.If you receive a product ID and alert ID rather than a 5-digit code, the
+associated record is a generic alert. Generic alerts do not have unique prestored
+panels in the hardware monitor. See “Using NMVT Support for User-Written
+Programming” on page 91 for more information on generic alerts.<br><br>
+                3. Examine the 5-digit code, xxxyy, that the NetView program returns. The
+variables are described as follows:<br><br>
+xxx&nbsp;&nbsp;&nbsp;&nbsp; Is the NetView-designated product code, or block ID, for the resource.<br>
+yy &nbsp;&nbsp;&nbsp;&nbsp;Is an individual panel identifier.<br>
+                4. Determine which panel contains the text you want to change, as follows:<br> . For a Recommended Action panel, the panel name (or panel alias) is
+BNIxxxyy, where xxx and yy are the codes you identified in step 3.<br><br> . For an Event Detail panel, the panel name (or panel alias) is BNKxxxyy, where xxx and yy are the codes you identified in step 3.<br><br> . Determine whether BNIxxxyy or BNKxxxyy is an actual or alias panel name: <br>– Use an editor such as ISPF/PDF to examine the directory listing of panel
+names. This listing is in the partitioned data set (PDS) named
+NETVIEW.V6R2M1.BNJPNL1 that is provided with the NetView program.<br><br>
+The word alias is displayed next to the panel names that are aliases.<br> . See the appropriate section of this book for the action you want to perform:<br><br>
+“Changing Panel Text” on page 80, “Changing from Alias to Actual” on page
+80, “Deleting an Actual or Alias” on page 80, or “Adding an Actual or Alias”
+on page 80.<br><br>
+“Sample BNJBLKID Table” is an example of a BNJBLKID table<br>
+        <img style="width: 650px;height: 570px;" src="i44.png">        
+          <img style="width: 650px;height: 770px;" src="i45.png"><br> 
+                <b>Changing Panel Text</b><br>
+                If BNIxxxyy or BNKxxxyy is an actual panel name (not an alias), follow these steps
+to change the panel wording. BNIxxxyy panels must contain exactly 14
+noncomment lines; BNKxxxyy panels must contain exactly seven noncomment
+lines. Comment lines contain an asterisk (*) in column 1.<br><br>
+1. Use an editor, such as ISPF/PDF, to edit the PDS member containing the panel.
+The PDS name is NETVIEW.V6R2M1.BNJPNL1 (unless it is changed during
+installation), and the member name is the same as the panel name.<br><br>
+2. Save the changed member. The changes apply to all event conditions that use the panel or any of its aliases.<br><br>
+                <b>Changing from Alias to Actual</b><br><br>
+                If you want to make a panel that now appears under an alias into an actual panel,
+follow these steps:<br><br>
+1. Use an editor, such as ISPF/PDF, to edit the PDS member containing the panel
+alias. The PDS name is NETVIEW.V6R2M1.BNJPNL1 (unless it is changed
+during installation), and the alias member name is the same as the panel name.<br><br>
+2. Save the changed member. TSO converts the panel alias into an actual panel.<br><br>
+A new actual panel is created under the name that was formerly the alias.<br><br>
+<b>Reference: </b>For more information about z/OS utilities and JCL, refer to the z/OS
+library.<br><img style="width: 650px;height: 570px;" src="i46.png"><br>
+                <img style="width: 650px;height: 600px;" src="i47.png"><br>
+                <h33 style="border-top-style: solid;border-bottom-width: 2px;width: 100%;margin-left: 20%; margin-right: 20%;color:black; font-size: 25;">Nongeneric Alert Messages</h33><br>
+                To change the Event Description: Probable Cause text of any selection on an
+Alerts-Static, Alerts-History, Alerts-Dynamic, Event Detail, or Most Recent Events
+panel that is not associated with generic alerts, follow these steps:<br>
+                1. Determine the event of the associated text and identify a resource against
+which the event is logged.<br>
+2. For the resource identified in Step 1, display the Alerts-Static, Alerts-History, Alerts-Dynamic, Event Detail, or Most Recent Events panel.<br>
+                3. Enter sel# C, where sel# is the selection number of the event associated with
+the text you want to change. Message BNJ962I displays a 5-digit code
+associated with the event. If message BNJ378I is displayed, the event is generic.
+If you receive a product ID and an alert ID rather than a 5-digit code, the
+associated record is a generic alert. Generic alerts do not have unique prestored
+Event Description: Probable Cause text messages in the hardware monitor. See
+“Using NMVT Support for User-Written Programming” on page 91 for more
+information on generic alerts.<br>
+                4. Examine the following 5-digit code, xxxyy, that the NetView program returns.
+xxx Is the NetView-designated product code, or block ID, for the resource yy Is an individual hexadecimal panel identifier.<br>
+                5. Use an editor such as ISPF/PDF to retrieve and edit the CSECT that contains
+the text you want to change. The name of the CSECT is BNJVMxxx (PDS
+member in NETVIEW.V6R2M1.BNJSRC1), where xxx is the block ID you
+identified in Step 4.<br>
+                6. Locate the message text within BNJVMxxx. The message number for this text is
+the decimal equivalent of yy, where yy is the hexadecimal identifier you
+determined in Step 4.<br>
+                7. Change the assembler language macro DSIMDS<br><br>
+                <b>Reference:</b>: For the syntax of DSIMDS, <i>refer to IBM Tivoli NetView for z/OS
+Programming: Assembler</i> for the text you want to change.<br>
+                8. Save the changed CSECT.<br>
+                9. Reassemble the CSECT, and link edit the CSECT into the load module of the
+same name.<br><br>
+                <h34 style="border-top-style: solid;border-bottom-width: 2px;width: 100%;margin-left: 20%; margin-right: 20%;color:black; font-size: 25;">Using the ACTION Command List</h34><br><br>
+                You can use the ACTION command list to get more information on a
+recommended action that is displayed in the hardware monitor. See Chapter 4,
+“Modifying and Creating Online Help Information,” on page 65 for information on
+how to modify the Action Help panels displayed by the ACTION command list.
+Dnnn, Ennn, and Innn are recommended action numbers found on the
+Recommended Action panels. Rnnn numbers are actions found on the resolution
+action panel. The following describes what the ACTION command list displays for
+recommended action numbers:<br><br>
+                <b>ACTION Dnnn</b><br>
+Displays a detailed description that is provided with the NetView program
+of a recommended action.<br>
+<b>ACTION Ennn</b><br>
+Displays a description of a recommended action, created by your system
+programmer, for a user-defined generic alert action.<br>
+<b>ACTION Innn</b><br>
+Displays a description of a recommended action created for a generic alert
+action that is provided with the NetView program.<br>
+<b>ACTION Rnnn</b><br>
+Displays a description of an actual action created for a resolution action
+that is provided with the NetView program.<br>
+                <img style="width: 650px;height: 450px;" src="i48.png"><br>
+                I-number and E-number actions do not have associated panels that are supplied
+with the NetView program. However, the NetView program allows users to
+overlay I-numbers and E-numbers with action numbers, to create panels that are
+specific to the sending product.<br><br>
+                You can do this by modifying either table BNJDNUMB, which correlates a Product
+Set ID with action numbers, or table BNJDNAME, which correlates a Product
+Common Name with action numbers. BNJDNUMB is searched before BNJDNAME.<br><br>
+                Modify table BNJDNUMB or BNJDNAME in NETVIEW.V6R2M1.BNJPNL2 and
+create BNJwwwww PDS members.<br><br>
+                <b>Modifying BNJDNUMB, BNJDNAME, and BNJwwwww</b><br>
+                This section uses the names BNJDNUMB and BNJwwwww to indicate a PDS
+member.<br><br>
+                <b>BNJDNUMB</b><br>
+                BNJDNUMB correlates a product-set identification (PSID) with a unique file or
+PDS member (BNJwwwww) that contains the action numbers to use for this
+product. To modify BNJDNUMB, use an editor such as ISPF/PDF.<br><br>
+               <b> Note:</b> If the NetView program receives a generic alert whose PSID does not exist
+in BNJDNUMB and whose product common name does not exist in BNJDNAME,
+the default I-number or E-number is not modified.<br><br>
+                <img style="width: 650px;height: 150px;" src="i49.png"><br>
+                xxx<br> Specifies the number of entries in BNJDNUMB. This number must begin in
+column 1 and should be three characters long with leading zeros, if
+necessary.<br> yyyyyyyyy<br>
+Specifies up to nine characters representing the PSID. This entry must
+begin in column 1.
+BNJwwwww<br>
+Is the name of the PDS member beginning in column 11, that contains
+generic alert recommended action code points and associated action
+numbers. Names such as BNJDNUM2, BNJDNUM3, for example, are
+recommended. However, you can use any unique name. The name
+BNJDNUM1 is already used for generic alerts produced by the hardware
+monitor.<br><br>
+                Entries in BNJDNUMB must be in ascending order. Comment lines contain an
+asterisk (*) in column 1.<br><br>
+                <b>Determining the PSID:</b> Because the sending product can be either a hardware
+product or a software product, the PSID is defined as follows:<br>
+                . For hardware products, the PSID is defined with the four numeric characters
+identifying the machine type found in the X'00' subfield, Hardware Product
+Identifier (located in the first X'11' subvector of the first X'10' subvector in the
+generic alert).<br><br>
+                . For software products, the PSID is defined with the nine uppercase
+alphanumeric characters of the serviceable component identifier in the X'02'
+subfield, software product serviceable component identifier (located in the first
+X'11' subvector of the first X'10' subvector in the generic alert).<br><br>
+                <b>Note:</b> If the X'02' subvector does not exist, use the seven uppercase
+alphanumeric characters of the licensed program number in the X'08' subvector, software product program number (located in the first X'11' subvector of the first
+X'10' subvector in the generic alert).<br><br>
+                Two methods are available to determine the PSID of a generic alert that is logged
+to the hardware monitor database:<br><br>
+                . Select sel# C from Alerts-Static, Alerts-History, or Most Recent Events panels to
+display a message containing the PSID.<br> . Make a selection from the Event Detail menu to display page 1 of the PSID
+panel. This panel displays the sending PSID.<br><br>
+                <b>BNJDNAME</b><br>
+                BNJDNAME correlates a product common name with a unique file or PDS
+(BNJwwwww) that contains the action numbers to use for this product. To modify
+BNJDNAME, use an editor such as ISPF/PDF.<br>
+                The format for BNJDNAME follows:<br> xxx
+yyyyyyyyyyyyyyyyyyyyyyyyyyyyyy BNJwwwww comment<br>
+                Where:<br>
+                
+xxx<br> Specifies the number of entries in BNJDNAME. This number must begin in
+column 1 and must be three characters long with leading zeros, if
+necessary.<br>
+          yyy...y <br>Specifies up to 30 characters representing the software product common
+name or up to 15 characters specifying the hardware common name.<br>
+                BNJwwwww<br>
+Is the name of the PDS member beginning in column 32, that contains
+generic alert recommended action code points and associated action
+numbers. Names such as BNJDNUM2, BNJDNUM3, and so forth, are
+recommended. However, you can use any unique name. The name
+BNJDNUM1 is already used for generic alerts produced by the hardware
+monitor.<br>
+                comment<br>
+Comments must start in column 45.<br>
+The NetView program provides the following data in this PDS member:<br>
+                <b>Sample BNJDNAME Table</b>
+                001<br>
+NETVIEW&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; BNJDNUM1 NETVIEW&nbsp;&nbsp;&nbsp; PRODUCT<br><br>
+                <b>Determining the Product Common Name:</b>Because the sending product can be
+either hardware or software, the product common name is defined as follows:<br>
+                . For hardware products, the hardware common name is defined by the EBCDIC
+characters found in the X'0E' subfield, Hardware Product Common Name
+(located in the first X'11' subvector of the first X'10' subvector in the generic
+alert).<br><br>
+                . For software products, the software common name is defined by the EBCDIC
+characters found in the X'06' subfield, Software Product Common Name (located
+in the first X'11' subvector of the first X'10' subvector in the generic alert).<br><br>
+                To determine the product common name of a generic alert that is logged to the
+hardware monitor database, make selection 2 from the Event Detail menu. This
+selection will display the common name (hardware or software) of the sending
+product.<br><br>
+                <b>BNJwwwww</b><br>
+                Each BNJwwwww member contains generic alert recommended action code points
+and associated action numbers. To create the BNJwwwww files or members
+specified in table BNJDNUMB, use an editor such as ISPF/PDF. Each BNJwwwww
+PDS member should be stored in the first data set in the concatenation string for
+the DD statement BNJPNL2. This DD statement is in the NetView startup
+procedure.<br><br>
+                Avoid defining your panel data set with secondary extents when modifying or
+creating a panel while the NetView program is running. If a secondary extent is
+defined while the NetView program is running, a secondary extent failure can
+occur causing error recovery and loss of a single instance of a request. If a second
+attempt is made to execute the request, error recovery might succeed in the
+execution of the request. However, recycling the NetView program would be
+required for a full data set.<br><img style="width: 650px;height: 150px;" src="i50.png"><br>
+                Where:<br>
+xxxx <br>Is the 4-character generic alert recommended action code point (EBCDIC
+version of the recommended action code point as defined by the generic
+alert architecture). This field must begin in column 1.
+yyyyyyyy<br>
+Is the 8-character alert ID number (EBCDIC version of the alert ID number
+as defined in the X'92' subvector architecture). This field is optional. If
+present, it must begin in column 11.
+dnum Is the 4-character unique action number. This field begins in column 21.
+Action numbers can be any combination of four EBCDIC characters.<br> The
+limiting factor of the action number is the ability of the ACTION command
+list to use these four characters and display the associated panel.<br><br>
+                Entries in each BNJwwwww file or member must be in ascending hexadecimal
+order. If a non-hexadecimal number is used, it is skipped.<br><br>The BNJwwwww file or member specified in BNJDNUMB or BNJDNAME is
+searched serially until a match is found or the end of the file is reached. After the
+first * is found in column 1, the serial searching stops.<br><br>You can place blanks in the alert ID field, along with specific alert IDs, for a
+particular action code point.<br><img style="width: 650px;height: 150px;" src="i151.png"><br>
+                For alert D2556B79, the code point 1002 uses D777 as its action number. For alert
+93987791, code point 1002 uses D890 as its action number. For all other alerts from
+this sending product, code point 1002 uses D562 as its action number<br>
+                <h35 style="border-top-style: solid;border-bottom-width: 2px;width: 100%;margin-left: 20%; margin-right: 20%;color:black; font-size: 25;">Changing Color and Highlighting for Hardware Monitor Panels</h35><br>
+                For the hardware monitor displays, you can alter the color, highlighting, and
+intensity of the display's text. You can also enable the display to produce an
+audible alarm. Consider the needs of the display users before you modify these
+four attributes as assigned by the NetView program.<br><br>
+                <b>Note:</b> Changing the length of any attribute, row placement, or column placement
+yields unpredictable results.<br><br>
+                For any string of display text that is preceded by a blank, you can modify up to
+four attributes as follows:<br><br>
+                <b>Color</b> <br>Text is red, yellow, blue, white, green, turquoise, or pink.<br>
+<b>Highlighting</b><br>
+Text is underscored, blinking, or in reverse video.<br>
+<b>Intensity</b><br>
+Text is more intense (monochrome terminals only).<br>
+<b>Alarm</b> <br>Text causes an audible alarm at the user's terminal.<br><br>
+                You can change these attributes for specific displays or for all displays. For
+example, you can select a single color for prompt lines on all displays.<br><br>
+                The procedure for modifying these attributes begins with a color map. A color map
+is a table that embeds characters, representing the various attributes, in a color
+buffer. These characters in the color buffer control the appearance of the text.<br><br>
+                The automation table can also be used to set or change the color and highlighting
+of specific alerts for hardware monitor display.<br><br>
+                <b>Reference:</b> For more information, refer to the<i>IBM Tivoli NetView for z/OS
+Automation Guide.</i><br><br>
+                <b>Selecting the Color Map</b><br><br>
+                The first step in modifying a hardware monitor display is to determine which color
+map controls the display you want to change. Appendix A, “Color Maps for
+Hardware Monitor Panels,” on page 177, contains a matrix of the panel name,
+panel number, and color map for hardware monitor panels.<br><br>
+After you identify the color map you need, edit the map using an editor such as
+ISPF/PDF. The color maps are contained in the PDS named
+NETVIEW.V6R2M1.BNJPNL2 (unless the name is changed during installation). The
+member name is the color map name.<br><br>
+Note: If you want a particular attribute to apply to the same portion of each panel,
+modify the color map BNJOVERW, which overwrites all other panel-specific color
+maps. Be sure to test the results of BNJOVERW on each panel before putting it into
+your production system. This map can produce unexpected results.<br><br>
+                <b>Modifying the Color Map</b><br><br>
+                After you select the color map, you can modify it. A color map consists of a series
+of lines of data, called map elements. The first line of a color map is always the
+number of subsequent map elements. Map elements begin in column 1, and are
+paired with comments that begin in column 41.<br><br>
+                Each map element specifies, for a particular display row, the attribute, the
+attribute's placement in the row, and the length in characters. Each item in the map
+is followed by a comma, except for the last one, which is followed by a period.<br><br>
+                <b>Note:</b>Changing any attribute's length, row placement, or column placement can
+yield unpredictable results.<br><br>
+                <img style="width: 650px;height: 350px;" src="i52.png"><br>
+                <img style="width: 650px;height: 350px;" src="i53.png"><br>
+                . The first item is the number of attributes in the map element. This can be a
+value from 1 to 4.. A map element might have only one set of attributes, for
+example, pink color, or any combination of attributes, such as pink color and
+underscoring. The sample map element has one attribute, the color blue (BLU).<br><br>. The second item is the number of the display row that reflects the attribute. In
+the sample, the attribute is to appear in row 1.<br><br>. The third item is the number of the display column that contains the attribute
+character. In the sample, the attribute character is to be placed in column 1.
+Consequently, the displayed text will begin in column 2.<br><br>
+                <b>Note:</b> Be sure that the display text you want to modify is preceded by a blank
+space. Otherwise, the character representing the attribute in the color buffer
+overwrites some of the display text, and some characters are replaced with
+blanks. For example, in the following string you cannot make the colon a
+different color from the text:<br>
+EVENT DESCRIPTION:PROBABLE CAUSE<br>
+                . The fourth item is the maximum character length of the attribute. In the sample,
+the specified attribute covers 79 characters on the display, or columns 2–80. <br><br>
+                . The last item is the attribute or sequence of several attributes. In the sample, the
+color blue is the specified attribute. You can specify up to four attributes, but
+only one from each category. If you want multiple attributes to apply to the
+same character or string, you must specify the attributes for each category in this
+order:<br><br>
+                1. Alarm: ALM produces an audible alarm.<br>
+2. Intensity:<br> – HIG intensifies the color.<br> – NOH returns the color to normal intensity.<br> 3. Highlighting:<br> – UND underlines the character or string.<br> – BLI causes the character or string to blink.<br>
+4. Color:<br> – RED produces red.<br> – YEL produces yellow.<br> – BLU produces blue.<br> – WHI produces white.<br> – GRE produces green.<br> – TUR produces turquoise.<br> – PIN produces pink.<br>
+                . The fourth item (50) is the maximum character length of the attribute. In the
+sample, the specified attribute covers 50 characters on the display.<br>
+                . The last item (BLU) is the attribute or sequence of several attributes. You can
+specify up to four attributes, but only one from each category. If you want
+multiple attributes to apply to the same character or string, you must specify the
+attributes in the order shown in “Sample Color Map” on page 87. In the sample,
+the color blue is the specified attribute.<br><br>This sample map element makes the text in the first prompt line, columns 2–51,
+blue.<br><br>
+                <b>Prompt Highlight Tokens</b><br>
+                The prompt highlight token table BNJPROMP is located in the PDS named
+NETVIEW.V6R2M1.BNJPNL2. You can modify this table. The maximum size of the
+table is 25 prompts, with the prompt being a 15-byte character field. If you decide
+to modify the table, use the Comment column for notes about the table. For
+performance reasons, this table is not processed when building the Alert Dynamic
+panel. Color is a 3-byte character field beginning at column 20. You can select only
+those colors that are valid in the color maps. Table 15 is a sample of the format for
+the prompt highlight token table.<br><br><img style="width: 650px;height: 450px;" src="i54.png"><br>
+                The table is read into storage at initialization. You can redefine the prompt
+highlight tokens or add new ones, up to a maximum of 25. You receive a message
+if the table is not successfully read at initialization.<br><br>
+                <h36 style="border-top-style: solid;border-bottom-width: 2px;width: 100%;margin-left: 20%; margin-right: 20%;color:black; font-size: 25;">Using NMVT Support for User-Written Programming</h36><br>
+                Network management vector transport (NMVT) support enables user-written
+programs to report errors to the hardware monitor through generic alerts. Prior to
+generic alerts, Recommended Action panels, Event Detail panels, and alert
+messages were stored at the host in the NetView program. Each nongeneric alert
+had a unique set of panels and messages.<br><br>
+               <b> Note:</b> The original NMVT encoding contains many SNA major vectors including
+Alerts. Subsequent encoding such as MDS_MU and CP_MSU contains many of the
+same major vectors and are covered under the term NMVT in this section.<br><br>
+                Coded generic alerts are contained in the NMVT. Generic alert code points are
+used to dynamically build the hardware monitor panels. Nongeneric alerts are
+used mainly for migration purposes. You should create new user-defined alerts
+using generic alerts.<br><br>
+                <b>Reference:</b>For more information on major vectors and subvectors of an NMVT, refer to the SNA library<br><br>
+                This section contains a sample generic alert and the associated panels that are built
+by the hardware monitor. (See Figure 21 on page 94 through Figure 25 on page 98.)
+This section also describes how each panel is built.<br><br>
+                <b>User-Defined Alerts (Nongeneric)</b><br><br>
+                Sixteen block IDs (X'F00'–X'F0F'), which are part of NMVT major vector X'0000', are
+reserved for generating user-defined alerts.<br><br>
+                The hardware monitor reserves USER0��–USERF�� (where �� are required blank
+space X'40' characters to pad the name to 7 characters) for use as the
+corresponding 7-character software identifier in the software product program
+number (X'08') subfield of the first product identifier (X'11') subvector of the
+NMVT. These are mapped to the block IDs from X'F00' to X'F0F'.<br><br>
+                The hardware monitor allows a 1-byte alert description code within the basic alert
+(X'91') subvector of the NMVT. This code lets you further qualify the alert. Put
+your alert description code in the second byte of the 2-byte Alert Description Code
+field. The hardware monitor ignores the first byte of that field.<br><br>
+                <b>NMVT-to-Panel ID Mapping</b><br>
+                Using the block ID derived from the software product program number and the
+alert description code, the hardware monitor maps the NMVT to the following:<br>
+                . 14-line panel<br>
+A 14-line panel appears on the Recommended Action panel of the hardware
+monitor for the NMVT. The PDS member name for this 14-line panel is in the
+range between BNIF00xx and BNIF0Fxx, where the range of block IDs is from
+X'F00' to X'F0F', and xx is the hexadecimal value of the alert description code.
+The lines can be up to 80 characters long.<br>
+                . 7-line panel<br>
+A 7-line panel appears on the hardware monitor's event detail panel for the
+NMVT. The 7-line panel's PDS member name is in the range between BNKF00xx
+and BNKF0Fxx, where the range of block IDs is from X'F00' to X'F0F', and xx is
+the hexadecimal value of the alert description code.<br>
+                The first eight translated characters of each of the first three X'A0' or X'A1'
+qualifier subvectors are displayed on an eighth line, immediately following the
+Event Detail panel. Write the Event Detail messages, with titles on the seventh
+line, to describe the qualifiers.<br>
+                . 48-byte alert description<br>
+A 48-byte alert description appears on the Alerts-Dynamic, Alerts-Static,
+Alerts-History, Event Detail, and Most Recent Events panels. The 48-byte text
+descriptions for a block ID are in a NetView message CSECT whose link-edit
+load module name is in the range between BNJVMF00 and BNJVMF0F.<br>
+                <b>Panel Formats</b><br>
+                For each new Recommended Action panel or Event Detail panel, use the same
+format as in the existing panels to add a panel to the NetView panel library or a
+concatenated user library.<br><br>
+                For each new 48-byte alert description CSECT, use the same format as an existing
+BNJVMxxx CSECT. BNJVMxxx CSECTs are coded using the macro DSIMDS. No
+variable substitution is permitted for 48-byte alert descriptions.<br><br>
+                <b>User-Defined Alerts (Generic)</b><br>
+                Generic alerts allow coded alert data to be transported within the alert, eliminating
+the need for stored panels. The coded data can be one of the following:<br>
+                . An index into predefined tables, containing short units of text that are used to
+build a panel.<br>
+                . Textual data that appears directly on the panel<br><br>
+                Coded data is maintained in code point tables which can be customized (For more
+information on customizing code point tables, see “Modifying Generic Code Point
+Tables” on page 100). The text strings indexed by the code points, and the display
+of textual data that was sent in the alert, are in the same format no matter which
+product sent the alert. Also, the same terminology is used to define similar
+problems within different products because each product uses terminology defined
+by Tivoli.<br><br>
+                Generic alerts produce the same Alerts, Recommended Action, and Detail panels as
+the hardware monitor's nongeneric alert support, but the panels are built
+dynamically rather than using stored panels. Code points index into the tables
+defined by Tivoli and the user.<br><br>
+                The alert description and probable cause code points are used to build the
+hardware monitor Alerts-Dynamic, Alerts-Static, Alerts-History, Event Detail, and
+Most Recent Events panels. The user cause, install cause, failure cause, and
+recommended action code points are used to build the hardware monitor
+Recommended Action panel. The detail data code points are used to identify the
+qualifiers that can appear on the hardware monitor Recommended Action or Event
+Detail panel. Products use the same set of architected product-independent
+terminology to define their Alert, Recommended Action, and Detail panels. Text
+data transported in the NMVT is displayed on the Event Detail panel.<br><br>
+                The NetView program ships generic code point tables that can be customized (for
+more information on customizing code point tables, see “Modifying Generic Code
+Point Tables” on page 100.). The generic code point tables shipped by the NetView
+product are: <br><br>
+                . BNJ92TBL—Alert description code points<br>
+                . BNJ93TBL—Probable cause code points<br>
+. BNJ94TBL—User cause code points<br>
+. BNJ95TBL—Install cause code points<br>
+. BNJ96TBL—Failure cause code points<br>
+. BNJ81TBL—Recommended action code points<br>
+. BNJ82TBL—Detail data code points<br>
+. BNJ85TBL—Detailed data code points, subfield X'85'<br>
+                . BNJ86TBL—Actual action code points.<br>
+                <b>Using the GENALERT Command</b><br>
+                You can use the GENALERT command to create your own alerts. The GENALERT
+command is described in the NetView online help. For more information about the
+code points and code point formats that can be used by the GENALERT command,
+see the generic alert code points appendix in the<i>IBM Tivoli NetView for z/OS
+Messages and Codes Volume 2 (DUI-IHS).</i><br><br>
+                <b>Building Generic Alert Panels</b><br>
+                Figure 21 on page 94 is an example of a generic alert NMVT. Unique panels are
+built using the information contained in a generic alert record.<br><br>
+                <b>Reference:</b> For more information on NMVTs, refer to the SNA library.<br>
+                <img style="width: 650px;height: 750px;" src="i55.png"><br>
+                Figure 22 on page 95 through Figure 24 on page 98 describe how each unique
+panel is built using the information contained in a generic alert NMVT. Figure 22
+on page 95 shows a sample Alerts-Dynamic panel. Explanations of the numerical
+references follow the panel.<br>
+                <img style="width: 650px;height: 750px;" src="i56.png"><br>
+                <img style="width: 650px;height: 450px;" src="i58.png"><br>
+               1 The RESNAME and TYPE come from the last name and type pair in the X'05'
+subvector. The sample display shows a RESNAME of PU9999 and a TYPE of LIN.<br><br>
+               2 The * indicates that the RESNAME preceding the TYPE does not belong to the
+TYPE. The TYPE is always associated with the last name in the hierarchy, but the
+name depends on how the X'05' is coded. The Do Not Display Resource Name
+Indicator bit is set to 1 for the last name and type pair (subvector X'05', subfield
+X'10', second name and type pair, eighth byte, second bit).<br><br>
+               3 The ALERT DESCRIPTION is derived from code point X'1603' in the X'92'
+subvector. The code point provides an index into a table containing the alert
+description text messages. The sample shows an ALERT DESCRIPTION of COMM
+SUBSYSTEM FAILURE.<br><br>
+               4 The PROBABLE CAUSE is derived from code point X'0403' in the X'93' subvector. The code point provides an index into a table containing the probable cause text
+messages. The sample shows a PROBABLE CAUSE of COMM SUBSYSTEM CTRL.<br><br>
+            5  The + is included because the X'93' subvector in Figure 22 contains more than
+one probable cause code point. The + indicates that more probable causes can be
+seen on the Event Detail panel.<br><br>
+                Figure 23 on page 96 shows a sample Recommended Action panel. Explanations of
+the numerical references follow the panel.<br><br>
+                <img style="width: 650px;height: 450px;" src="i57.png"><br>
+                1 The resource names (PU9999 and LINE04) are taken from the X'05' hierarchy
+names list subvector. In Figure 21 on page 94, only names from the X'05' subvector
+are used because the Hierarchy Complete Indicator bit (byte 2 bit 0) in the
+indicator bit X'05' subvector is set to X'0'. If this bit was set to 1, the NetView
+program would concatenate the names in the X'05' subvector to the names
+supplied by VTAM.<br><br>
+                2  The resource types (PU and LINE) are derived by converting the type codes in
+the X'10' subfield of the X'05' subvector (X'F1' and X'F9') into displayable resource
+types. For more information on changing resource types, see “Adding or
+Modifying Resource Types” on page 103.<br><br>
+                3 The X'94' subvector (NONE) carries user-caused information. Because the X'94'
+subvector is not included in Figure 21 on page 94, user-caused information is not
+displayed.<br><br>
+              4 The two install-caused probable causes:<br>
+INCORRECT MICROCODE FIX<br>
+INCORRECT SOFTWARE GENERATION:<br><br>
+                are built from code points (X'1502' and X'13E1') in the X'01' subfield within the
+X'95' subvector. The E in the X'13E1' code point indicates an X'83' subfield is
+needed to complete the install cause.<br><br>
+               5 The qualifier on the install cause (ACF/IBM) is displayed because of the X'83'
+subfield of the X'95' subvector. The X'83' subfield contains the value X'91'
+indicating that the qualifier is taken from the product ID subfield (X'06' Software
+Product Common Name) of the first product identifier subvector (X'11').<br><br>
+                6 The two install-caused actions:<br>
+I013 - VERIFY X.25 SUBSCRIPTION NUMBER<br>
+I085 - APPLY CORRECT SOFTWARE LEVEL<br>
+                are taken from code points (X'0101' and X'1504') in the X'81' subfield of the X'95'
+subvector.<br><br>
+                7 The two failure-caused probable causes:<br>
+COMMUNICATIONS SUBSYSTEM<br>
+LINE ADAPTER MICROCODE<br><br>
+                are taken from code points (X'0503' and X'33C2') in the X'01' subfield of the X'96'
+subvector. The C in the X'33C2' code point indicates that two detail data subfields,
+either X'82' or X'85' subfields, are needed to complete the failure cause. This
+example uses X'82' subfields. While either X'82' or X'85' subfields can be used here,
+a combination of the two would not be valid. Within a subvector, all of the detail
+qualifiers must be X'82' subfields or X'85' subfields.<br><br>
+                8 Indicates the ADAPTER NUMBER 04 is broken down from the first X'82' subfield in
+the X'96' subvector. The number can be:<br>
+00&nbsp;&nbsp;&nbsp;&nbsp;No information is taken from the PSID subvector<br>
+61&nbsp;&nbsp;&nbsp;&nbsp; A code point for adapter number<br>
+00&nbsp;&nbsp;&nbsp;&nbsp; Hexadecimal data follows<br>
+04&nbsp;&nbsp;&nbsp;&nbsp; Hexadecimal data to be displayed<br>
+               9 LINE ADDRESS RANGE 00 - 1F is broken down from the second X'82' subfield in
+the X'96' subvector. The range can be:<br>
+00&nbsp;&nbsp;&nbsp;&nbsp; No information is taken from the PSID subvector<br>
+53 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A code point for line address range<br>
+11&nbsp;&nbsp;&nbsp;&nbsp; EBCDIC data follows<br>
+F0F0406D40F1C6<br>
+EBCDIC data to be displayed<br><br>
+                10 The failure-caused actions:<br>
+I032 - DUMP CHANNEL ADAPTER MICROCODE<br>
+I026 - RUN APPROPRIATE TRACE<br>
+I136 - CONTACT COMMUNICATIONS SYSTEMS PROGRAMMER<br>
+I010 - PERFORM 9999 PROBLEM DETERMINATION PROCEDURES<br><br>
+                are taken from the code points (X'0611', X'0500', X'3110', and X'00E1') in the X'81'
+subfield of the X'96' subvector. The E in the X'00E1' code point indicates that an
+X'83' subfield is needed to complete the failure cause.<br><br>
+                11 The qualifier on the failure cause (9999) is displayed because of the X'83'
+subfield of the X'96' subvector. The X'83' subfield contains the value X'21',
+indicating that the qualifier is taken from the first hardware PSID subfield (X'00')
+of the PSID subvector (X'11').<br><img style="width: 650px;height: 750px;" src="i59.png"><br>
+                1 The resource names (PU9999 and LINE04) are taken from the X'05' hierarchy
+names list subvector. In Figure 21 on page 94, only names from the X'05' subvector
+are used because the Hierarchy Complete Indicator bit (byte 2, bit 0) in the X'05'
+subvector is set to X'0'. If this bit was set to 1, the NetView program would
+concatenate the names in the X'05' subvector to the names supplied by VTAM.<br><br>
+2 The resource types (PU and LINE) are derived by converting the type codes in
+the X'10' subfield of the X'05' subvector (X'F1' and X'F9'), into displayable resource
+types. For more information on changing resource types, see “Adding or
+Modifying Resource Types” on page 103.<br><br>
+3 The DATE/TIME RECORDED is the time the record is logged to the hardware
+monitor database. The created field shows the time the record was created by the
+sending product. It is taken from the X'10' subfield of the X'01' subvector.<br><br> 4 EVENT TYPE is derived from byte 4 (Alert Type) the X'92' subvector.<br><br>5 DESCRIPTION is derived from the code point (X'1603') in the X'92' subvector, as
+is the description on the Alerts panel. However, a longer version of the text is
+displayed on this panel.<br><br>
+6 PROBABLE CAUSES are taken from the code points (X'0403' and X'2012') in the
+X'93' subvector. A longer version of the text is displayed on this panel than was
+displayed on the Alerts panel. Also, all of the probable causes are displayed.<br><br>
+7 QUALIFIERS are derived from either X'82' or X'85' subfields. The NetView
+program ignores X'01' subfields and associated sub-subfields (including X'82' and
+X'85') in a X'98' subvector. While either X'82' or X'85' subfields can be used here, a combination of the two
+would not be valid. Within a subvector, all of the detail qualifiers must be X'82'
+subfields or X'85' subfields.<br><br>
+                This example uses X'82' subfields, and the qualifiers are decoded as follows:<br><br>
+First in the X'98' subvector:<br><br>
+21&nbsp;&nbsp;&nbsp;&nbsp; Data should be taken from the first hardware PSID subfield (X'00') of the
+PSID subvector (X'11').<br>
+34&nbsp;&nbsp;&nbsp;&nbsp; Code point indicating communication control unit.<br>
+00 &nbsp;&nbsp;&nbsp;&nbsp;Hexadecimal data follows.<br>
+0004&nbsp;&nbsp;&nbsp;&nbsp; Hexadecimal data to be displayed.<br>
+                Second in the X'98' subvector:<br>
+00&nbsp;&nbsp;&nbsp;&nbsp; No data is taken from the PSID subvector.<br> 09&nbsp;&nbsp;&nbsp;&nbsp; Code point indicating event code.<br>
+11&nbsp;&nbsp;&nbsp;&nbsp; EBCDIC data follows.<br>
+F2F2&nbsp;&nbsp;&nbsp;&nbsp; EBCDIC data to be displayed.<br>
+Third in the X'98' subvector:<br>
+00 &nbsp;&nbsp;&nbsp;&nbsp;No data is taken from the PSID subvector.<br> 0E&nbsp;&nbsp;&nbsp;&nbsp; Code point indicating reason code.<br>
+     00&nbsp;&nbsp;&nbsp;&nbsp; Hexadecimal data follows.<br>
+00DC&nbsp;&nbsp;&nbsp;&nbsp; Hexadecimal data to be displayed.<br>
+                <br>
+                Page 2 of the Event Detail panel (see Figure 24 on page 98) contains the following
+information:<br><br>
+                8 CONTROL PROGRAM TEXT is the text title displayed because of the subfield X'21' of
+subvector X'31'. The text itself is taken directly from subfield X'30' of the X'31'
+subvector and displayed on the screen.<br><br>
+                9 The CORRELATION FOR SUPPORTING DATA is displayed from the X'48' subvector. Subfield X'60' specifies that the network-qualified procedure correlation identifier
+be used to uniquely identify a session.<br><br>
+                Either X'82' or X'85' subfields are used for supporting data. This example uses two
+X'82' subfields to identify the supporting data.<br><br>
+                While either X'82' or X'85' subfields can be used here, a combination of the two is
+not valid. Within a subvector, all of the detail qualifiers must be X'82' subfields or
+X'85' subfields.<br><br>
+               10 The product ID (ACF/IBM) is taken directly from the first product identifier
+(X'11') subvector in the first PSID (X'10') subvector. Figure 21 on page 94 uses the
+Software Product Serviceable Component Identifier (X'02') subfield.<br><br>
+               11 The alert ID number (1A2B3C4D) is taken from subvector X'92' bytes 7–10.<br><br>
+                <b>Modifying Generic Code Point Tables</b><br><br>
+                This section explains how to modify the generic alert code point tables that are
+shipped with the NetView program. You can modify the tables before or after
+NetView initialization. If after, use the CPTBL command to dynamically activate
+the changes. The CPTBL command is described in NetView online help.<br><br>
+                <b>Table Formats</b><br>
+                Each table contains a different type of code point. The tables are:<br> . BNJ92TBL: Alert description code points<br>
+. BNJ93TBL: Probable cause code points<br>
+. BNJ94TBL: User cause code points<br>
+. BNJ95TBL: Install cause code points<br>
+. BNJ96TBL: Failure cause code points<br>
+. BNJ81TBL: Recommended action code points<br>
+. BNJ82TBL: Detail data code points<br>
+. BNJ85TBL: Detail data code points, X'85' subfield<br>
+. BNJ86TBL: Actual action code points.<br><br>
+                The fourth and fifth characters of the table name identify the subvector or subfield
+that contains the code points.<br><br>
+                The first entry in the code point table is the control entry. Columns 1 and 2
+represent the subvector number which specifies which of the code point tables is
+being created or updated. Acceptable values are 92, 93, 94, 95, 96, 81, 82, 85, or 86.
+During initialization, this number must match the table name. Column 3 must be
+blank and all remaining columns are unused and are ignored. (You should not use.
+                
+                
+                
+                
+                
+                
+                
+                
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            </p14>
+        
+        
+        
+    </body>
+    </html>
